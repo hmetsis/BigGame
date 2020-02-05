@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Block {
+public class  Block {
 
     private Position position;
     private Character [] blockArray;
-    private List<Position> block = new ArrayList<>();
+    private List<Position> oneBlock = new ArrayList<>();
+    private List<List<Position>> allBlocks = new ArrayList<>();
     final char blockChar = '\u2588';
 
     public Block () {
@@ -22,29 +23,60 @@ public class Block {
 
         for (int i = 0; i < blockLength; i++) {
             Position position = new Position(x, y-blockLength);
-            block.add(position);
+            oneBlock.add(position);
             y++;
         }
     }
 
 
     public void moveBlock(Terminal terminal) throws Exception {
-        int y = block.get(block.size()-1).getY();
-        int x = block.get(block.size()-1).getX();
+        int y = oneBlock.get(oneBlock.size()-1).getY();
+        int x = oneBlock.get(oneBlock.size()-1).getX();
 
-        block.add(new Position(x, y+1));
+        oneBlock.add(new Position(x, y+1));
         terminal.setCursorPosition(x, y+1);
         terminal.putCharacter(blockChar);
 
-        terminal.setCursorPosition(block.get(0).getX(), block.get(0).getY());
+        terminal.setCursorPosition(oneBlock.get(0).getX(), oneBlock.get(0).getY());
         terminal.putCharacter(' ');
-        block.remove(0);
+        oneBlock.remove(0);
     }
 
     public void printBlock (Terminal terminal) throws Exception {
-        for (Position position : block) {
+        for (Position position : oneBlock) {
             terminal.setCursorPosition(position.getX(), position.getY());
             terminal.putCharacter(blockChar);
         }
     }
+    public void lyingDown () {
+        int x = ThreadLocalRandom.current().nextInt(11, 59);
+        int y = 0;
+        int blockWidth = ThreadLocalRandom.current().nextInt(3, 10);
+        //blockArray = new Character[blockLength];
+
+        for (int i = 0; i < blockWidth; i++) {
+            Position position = new Position(x, y);
+            oneBlock.add(position);
+            x++;
+        }
+    }
+
+    public void moveLying (Terminal terminal) throws Exception{
+
+        for(Block b : oneBlock) {
+
+        }
+
+        int y = oneBlock.get(oneBlock.size()-1).getY();
+        int x = oneBlock.get(oneBlock.size()-1).getX();
+
+        oneBlock.add(new Position(x, y+1));
+        terminal.setCursorPosition(x, y+1);
+        terminal.putCharacter(blockChar);
+
+        terminal.setCursorPosition(oneBlock.get(0).getX(), oneBlock.get(0).getY());
+        terminal.putCharacter(' ');
+        oneBlock.remove(0);
+    }
+
 }
