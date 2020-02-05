@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Player {
     private Position playerPosition;
@@ -52,21 +53,22 @@ public class Player {
         }
     }
 
-//    public void hitBlock(Block blocks, Terminal terminal) throws IOException {
-//        boolean hitBlock = false;
-//
-//        for (Position p : blocks.getBlocks()) {
-//            if (position.getX() == x && position.getY() == y) {
-//                hitBlock = true;
-//            }
-//        }
-//
-//        if (hitBlock) {
-//            printGameOver();
-//        } else {
-//            printPlayer(terminal);
-//        }
-//    }
+    public void hitBlock(List<List<Position>> allBlocks, Terminal terminal) throws IOException {
+        boolean hitBlock = false;
+            for (List<Position> oneBlock : allBlocks) {
+                for (Position p : oneBlock) {
+                    if (p.getX() == playerPosition.getX() && p.getY() == playerPosition.getY()) {
+                        hitBlock = true;
+                    }
+                }
+            }
+
+        if (hitBlock) {
+            printGameOver();
+        } else {
+            printPlayer(terminal);
+        }
+    }
 
     public void printPlayer(Terminal terminal) throws IOException {
         terminal.setCursorPosition(playerPosition.getOldX(), playerPosition.getOldY());
