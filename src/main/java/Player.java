@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Player {
-    private Position [] playerPosition = new Position[4];
+    protected Position [] playerPosition = new Position[4];
     final char playerChar = 'X';
     int [] playerGraphic = new int[4];
 
@@ -53,15 +53,24 @@ public class Player {
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
-            if (p.getX() == playerPosition[i].getX() && p.getY() == playerPosition[i].getY()) {
+           if(playerPosition[0].getX()>30){
+               if (p.getX() == playerPosition[0].getX()+3) {
+               for (int i = 0; i < playerGraphic.length ; i++) { playerPosition[i].setX(playerPosition[i].getOldX());
+               playerPosition[i].setY(playerPosition[i].getOldY());
+               crashIntoWall = true;
+           }}
+           }
+           else{
+            if (p.getX() == playerPosition[0].getX()) {
+                for (int i = 0; i < playerGraphic.length ; i++) { playerPosition[i].setX(playerPosition[i].getOldX());
+                playerPosition[i].setY(playerPosition[i].getOldY());
                 crashIntoWall = true;
-                break;
-            }
+            }}}
         }
 
         if (crashIntoWall) {
-            playerPosition[i].setX(playerPosition[i].getOldX());
-            playerPosition[i].setY(playerPosition[i].getOldY());
+       /*     playerPosition[i].setX(playerPosition[i].getOldX());
+            playerPosition[i].setY(playerPosition[i].getOldY());*/
         } else {
             printPlayer(terminal);
         }
