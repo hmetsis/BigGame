@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -46,27 +47,33 @@ public class Player {
     }}
 
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
+        for (int i = 0; i < playerGraphic.length ; i++) {
+
+
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
-            if (p.getX() == playerPosition.getX() && p.getY() == playerPosition.getY()) {
+            if (p.getX() == playerPosition[i].getX() && p.getY() == playerPosition[i].getY()) {
                 crashIntoWall = true;
             }
         }
 
         if (crashIntoWall) {
-            playerPosition.setX(playerPosition.getOldX());
-            playerPosition.setY(playerPosition.getOldY());
+            playerPosition[i].setX(playerPosition[i].getOldX());
+            playerPosition[i].setY(playerPosition[i].getOldY());
         } else {
             printPlayer(terminal);
         }
     }
-
+    }
     public void hitBlock(List<List<Position>> allBlocks, Terminal terminal) throws Exception {
+        for (int i = 0; i < playerGraphic.length ; i++) {
+
+
         boolean hitBlock = false;
             for (List<Position> oneBlock : allBlocks) {
                 for (Position p : oneBlock) {
-                    if (p.getX() == playerPosition.getX() && p.getY() == playerPosition.getY()) {
+                    if (p.getX() == playerPosition[i].getX() && p.getY() == playerPosition[i].getY()) {
                         hitBlock = true;
                     }
                 }
@@ -78,7 +85,7 @@ public class Player {
             printPlayer(terminal);
         }
     }
-
+    }
     public void printPlayer(Terminal terminal) throws IOException {
         for (int i = 0; i < playerGraphic.length ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());

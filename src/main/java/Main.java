@@ -47,7 +47,7 @@ public class Main {
 
             if(moveBlockSpeed % 3 == 0) {
                 for (int i = 0; i < Block.allBlocks.size(); i++) {
-                        Block block = (Block) Block.allBlocks.get(1);
+                        block = (Block) Block.allBlocks.get(1);
                         block.moveBlock(terminal);
                     }
                 }
@@ -60,7 +60,7 @@ public class Main {
             }
 
             player.playerMove(type);
-            player.hitBlock(block, terminal);
+           // player.hitBlock(block, terminal);
 
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
@@ -147,6 +147,7 @@ public class Main {
             gameOverX++;
         }
         gameOverX = 3;
-        }
         terminal.flush();
+        }
+
     }
