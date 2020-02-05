@@ -16,7 +16,7 @@ public class  Block {
     public Block () {
         int x = ThreadLocalRandom.current().nextInt(11, 59);
         int y = 0;
-        int blockLength = ThreadLocalRandom.current().nextInt(3, 10);
+        int blockLength = ThreadLocalRandom.current().nextInt(2, 3);
 
         for (int i = 0; i < blockLength; i++) {
             position = new Position(x, y-blockLength);
