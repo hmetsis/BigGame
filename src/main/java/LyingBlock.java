@@ -15,6 +15,7 @@ public class LyingBlock extends Block {
         }
     }
 
+    @Override
     public void moveBlock (Terminal terminal) throws Exception{
 
         for(Position b : oneBlock) {
@@ -28,6 +29,7 @@ public class LyingBlock extends Block {
         }
     }
 
+    @Override
     public void printBlock (Terminal terminal) throws Exception {
         for (Position position : oneBlock) {
             terminal.setCursorPosition(position.getX(), position.getY());

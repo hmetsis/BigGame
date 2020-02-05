@@ -15,6 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
             }
         }
 
+        @Override
         public void moveBlock(Terminal terminal) throws Exception {
             int y = oneBlock.get(oneBlock.size()-1).getY();
             int x = oneBlock.get(oneBlock.size()-1).getX();
@@ -28,6 +29,7 @@ import java.util.concurrent.ThreadLocalRandom;
             oneBlock.remove(0);
         }
 
+        @Override
         public void printBlock (Terminal terminal) throws Exception {
             for (Position position : oneBlock) {
                 terminal.setCursorPosition(position.getX(), position.getY());

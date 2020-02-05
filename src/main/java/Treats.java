@@ -15,10 +15,10 @@ public class Treats {
         } while(checkIfBlock());
     }
 
-    public boolean checkIfBlock() {
-        for (Block b : //Blocklist) {
-            for(Position p : Block.allBlocks) {
-                if (b.p.getY == treatPosition.getY() &&  b.p.getX == treatPosition.getX()) {
+    public boolean checkIfBlock(List<List<Position>> allBlocks) {
+        for (List<Position> oneBlock : allBlocks) {
+            for(Position p : b.) {
+                if (oneBlock.p.getY == treatPosition.getY() &&  b.p.getX == treatPosition.getX()) {
                     return true;
                 } else {
                     return false;

@@ -25,4 +25,12 @@ public class  Block {
             y++;
         }
     }
+
+    public void moveBlock (Terminal terminal) throws Exception {
+
+    }
+
+    public void printBlock (Terminal terminal) throws Exception {
+
+    }
 }
