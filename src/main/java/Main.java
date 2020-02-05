@@ -57,7 +57,7 @@ public class Main {
 
             }
             player.playerMove(type);
-            player.checkIfWall(walls, terminal);
+            player.hitBlock(block, terminal);
 
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);

@@ -61,13 +61,13 @@ public class  Block {
         }
     }
 
-    public void moveLying (Terminal terminal) throws Exception{
+ /*   public void moveLying (Terminal terminal) throws Exception{
 
         for(Block b : oneBlock) {
 
-        }
+        }*/
 
-        int y = oneBlock.get(oneBlock.size()-1).getY();
+       /* int y = oneBlock.get(oneBlock.size()-1).getY();
         int x = oneBlock.get(oneBlock.size()-1).getX();
 
         oneBlock.add(new Position(x, y+1));
@@ -76,7 +76,7 @@ public class  Block {
 
         terminal.setCursorPosition(oneBlock.get(0).getX(), oneBlock.get(0).getY());
         terminal.putCharacter(' ');
-        oneBlock.remove(0);
+        oneBlock.remove(0);*/
     }
 
-}
+
