@@ -5,6 +5,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -23,9 +24,10 @@ public class Main {
         terminal.setCursorVisible(false);
         paintBackground();
 
+        Block block = null;
 
         for(int i = 0; i < 3; i++) {
-
+            block = new Block();
         }
 
         Wall walls = new Wall();
@@ -43,9 +45,12 @@ public class Main {
         while (continueReadingInput) {
             Thread.sleep(400);
 
-            if(moveBlockSpeed % 3 == 0){
-                block.moveBlock(terminal);
-            }
+            if(moveBlockSpeed % 3 == 0) {
+                for (int i = 0; i < Block.allBlocks.size(); i++) {
+                        Block block = (Block) Block.allBlocks.get(1);
+                        block.moveBlock(terminal);
+                    }
+                }
 
             moveBlockSpeed++;
             keyStroke = terminal.pollInput();
