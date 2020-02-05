@@ -51,12 +51,13 @@ public class Main {
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
-            Thread.sleep(400);
+            Thread.sleep(10);
 
-            if (moveBlockSpeed % 3 == 0) {
+            if (moveBlockSpeed % 120 == 0) {
                 for (int i = 0; i < allBlocks.size(); i++) {
                     allBlocks.get(i).moveBlock(terminal);
                 }
+                moveBlockSpeed = 0;
             }
 
             moveBlockSpeed++;
@@ -68,7 +69,8 @@ public class Main {
 
             player.playerMove(type);
             player.checkIfWall(walls, terminal);
-            if (moveBlockSpeed % 5 == 0) {
+            player.hitBlock(terminal);
+            if (moveBlockSpeed % 200 == 0) {
                 int blockTypeChooser = ThreadLocalRandom.current().nextInt(1, 3);
                 if (blockTypeChooser % 2 == 0) {
                     allBlocks.add(new StandingBlock());
@@ -82,7 +84,6 @@ public class Main {
 //            terminal.setCursorPosition(oldX, oldY);
 //            terminal.putCharacter(' ');
             terminal.flush();
-
         }
     }
 
