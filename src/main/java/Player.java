@@ -52,6 +52,22 @@ public class Player {
         }
     }
 
+//    public void hitBlock(Block blocks, Terminal terminal) throws IOException {
+//        boolean hitBlock = false;
+//
+//        for (Position p : blocks.getBlocks()) {
+//            if (position.getX() == x && position.getY() == y) {
+//                hitBlock = true;
+//            }
+//        }
+//
+//        if (hitBlock) {
+//            printGameOver();
+//        } else {
+//            printPlayer(terminal);
+//        }
+//    }
+
     public void printPlayer(Terminal terminal) throws IOException {
         terminal.setCursorPosition(playerPosition.getOldX(), playerPosition.getOldY());
         terminal.putCharacter(' ');

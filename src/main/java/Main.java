@@ -66,12 +66,25 @@ public class Main {
 
     public static void paintBackground () throws IOException {
         terminal.clearScreen();
-
+        for(int i = 0; i < 10; i++) {
+            for (int j = 0; j < 60; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(TextColor.ANSI.RED);
+                terminal.putCharacter(' ');
+            }
+        }
         for(int i = 11; i < 60; i++) {
-            for(int j = 0; j < 60; j++) {
+            for (int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(TextColor.ANSI.CYAN);
                 terminal.putCharacter(' ');
+            }
+        }
+        for(int i = 60; i < 80; i++) {
+            for(int j = 0; j < 60; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(TextColor.ANSI.RED);
+                terminal.putCharacter('\u25A1');
             }
             terminal.flush();
         }
