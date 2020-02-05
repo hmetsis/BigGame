@@ -153,6 +153,7 @@ public class Main {
             gameOverX++;
         }
         gameOverX = 3;
+        terminal.flush();
         }
-        //terminal.flush();
+
     }
