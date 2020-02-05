@@ -5,11 +5,14 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
     public static boolean continueReadingInput = true;
+    static List<Block> allBlocks = new ArrayList<>();
 
     static {
         try {
@@ -22,8 +25,18 @@ public class Main {
     public static void main (String [] args) throws Exception {
         terminal.setCursorVisible(false);
         paintBackground();
-        Block block = new Block();
-        block.printBlock(terminal);
+
+        Block block = null;
+
+        for(int i = 0; i < 3; i++) {
+            if(i%2 == 0) {
+                block = new StandingBlock();
+            } else {
+                block = new LyingBlock();
+            }
+            allBlocks.add(block);
+        }
+
         Wall walls = new Wall();
         walls.printWall(terminal);
         Player player = new Player(20, 20);
@@ -32,30 +45,26 @@ public class Main {
         terminal.setBackgroundColor(TextColor.ANSI.CYAN);
 
         KeyType type = KeyType.ArrowUp;
-        KeyStroke keyStroke = null;
+        KeyStroke keyStroke;
         terminal.flush();
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
             Thread.sleep(400);
 
-
-            if(moveBlockSpeed % 3 == 0){
-                block.moveBlock(terminal);
-
-            }
+            if(moveBlockSpeed % 3 == 0) {
+                for (int i = 0; i < allBlocks.size(); i++) {
+                    allBlocks.get(i).moveBlock(terminal);
+                    }
+                }
 
             moveBlockSpeed++;
             keyStroke = terminal.pollInput();
 
             if(keyStroke!=null) {
-
-
-
                 type = keyStroke.getKeyType();
-
-
             }
+
             player.playerMove(type);
             player.checkIfWall(walls, terminal);
 
@@ -144,7 +153,7 @@ public class Main {
             gameOverX++;
         }
         gameOverX = 3;
-        }
         terminal.flush();
+        }
+
     }
-}

@@ -6,7 +6,7 @@ public class LyingBlock extends Block {
     public LyingBlock () {
         int x = ThreadLocalRandom.current().nextInt(11, 59);
         int y = 0;
-        int blockWidth = ThreadLocalRandom.current().nextInt(3, 10);
+        int blockWidth = ThreadLocalRandom.current().nextInt(2, 6);
 
         for (int i = 0; i < blockWidth; i++) {
             Position position = new Position(x, y);
