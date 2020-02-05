@@ -96,7 +96,7 @@ public class Main {
 
     }
 
-    public void gameOver() throws Exception {
+    public static void gameOver() throws Exception {
         continueReadingInput = false;
         printGameOver(terminal);
     }
@@ -144,24 +144,6 @@ public class Main {
             gameOverX++;
         }
         gameOverX = 3;
-        gameOverY = 12;
-        for (char c : numberOfStars.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-
-        gameOverX = 3 + numberOfStars.length();
-        for (char c : stars.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 3 + 1 + numberOfStars.length();
-        for (char c : numberOfStar2.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
         }
         terminal.flush();
     }

@@ -53,7 +53,7 @@ public class Player {
         }
     }
 
-    public void hitBlock(List<List<Position>> allBlocks, Terminal terminal) throws IOException {
+    public void hitBlock(List<List<Position>> allBlocks, Terminal terminal) throws Exception {
         boolean hitBlock = false;
             for (List<Position> oneBlock : allBlocks) {
                 for (Position p : oneBlock) {
@@ -64,7 +64,7 @@ public class Player {
             }
 
         if (hitBlock) {
-            gameOver();
+            Main.gameOver();
         } else {
             printPlayer(terminal);
         }
