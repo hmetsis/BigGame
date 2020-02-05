@@ -64,7 +64,7 @@ public class Player {
             }
 
         if (hitBlock) {
-            printGameOver();
+            gameOver();
         } else {
             printPlayer(terminal);
         }

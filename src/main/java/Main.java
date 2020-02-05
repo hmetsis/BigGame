@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Main {
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
+    public static boolean continueReadingInput = true;
 
     static {
         try {
@@ -35,7 +36,6 @@ public class Main {
         terminal.flush();
         int moveBlockSpeed = 0;
 
-        boolean continueReadingInput = true;
         while (continueReadingInput) {
             Thread.sleep(400);
 
@@ -75,7 +75,7 @@ public class Main {
             for (int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter(' ');
+                terminal.putCharacter('\u25A1');
             }
         }
         for(int i = 11; i < 60; i++) {
@@ -94,5 +94,75 @@ public class Main {
             terminal.flush();
         }
 
+    }
+
+    public void gameOver() throws Exception {
+        continueReadingInput = false;
+        printGameOver(terminal);
+    }
+
+    public static void printGameOver (Terminal terminal) throws Exception {
+        String gameOver1 = "              ____    _    __  __ _____    _____     _______ ____  ";
+        String gameOver2 = "             / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ";
+        String gameOver3 = "            | |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |";
+        String gameOver4 = "            | |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ";
+        String gameOver5 = "             \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\";
+
+        int gameOverX = 3;
+        int gameOverY = 6;
+        for (char c : gameOver1.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        gameOverX = 3;
+        gameOverY = 7;
+        for (char c : gameOver2.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        gameOverX = 3;
+        gameOverY = 8;
+        for (char c : gameOver3.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        gameOverX = 3;
+        gameOverY = 9;
+        for (char c : gameOver4.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        gameOverX = 3;
+        gameOverY = 10;
+        for (char c : gameOver5.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        gameOverX = 3;
+        gameOverY = 12;
+        for (char c : numberOfStars.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+
+        gameOverX = 3 + numberOfStars.length();
+        for (char c : stars.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        gameOverX = 3 + 1 + numberOfStars.length();
+        for (char c : numberOfStar2.toCharArray()) {
+            terminal.setCursorPosition(gameOverX, gameOverY);
+            terminal.putCharacter(c);
+            gameOverX++;
+        }
+        terminal.flush();
     }
 }
