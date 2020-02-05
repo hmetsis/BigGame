@@ -8,14 +8,12 @@ import java.util.concurrent.ThreadLocalRandom;
             int y = 0;
             int blockLength = ThreadLocalRandom.current().nextInt(3, 10);
 
-
             for (int i = 0; i < blockLength; i++) {
                 Position position = new Position(x, y-blockLength);
                 oneBlock.add(position);
                 y++;
             }
         }
-
 
         public void moveBlock(Terminal terminal) throws Exception {
             int y = oneBlock.get(oneBlock.size()-1).getY();
@@ -36,5 +34,4 @@ import java.util.concurrent.ThreadLocalRandom;
                 terminal.putCharacter(blockChar);
             }
         }
-
     }
