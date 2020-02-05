@@ -1,10 +1,10 @@
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Player {
     private Position [] playerPosition = new Position[4];
@@ -45,7 +45,7 @@ public class Player {
         }
     }}
 
- /*   public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
+    public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
@@ -60,22 +60,21 @@ public class Player {
         } else {
             printPlayer(terminal);
         }
-    }*/
+    }
 
-    public void hitBlock(Block blocks, Terminal terminal) throws IOException {
-           boolean hitBlock = false;
-        for (int i = 0; i < playerGraphic.length ; i++) {
-
-
-       /* for (Position p : blocks.getBlocks()) {
-            if (position[i].getX() == x && position.getY() == y) {
-                hitBlock = true;
+    public void hitBlock(List<List<Position>> allBlocks, Terminal terminal) throws Exception {
+        boolean hitBlock = false;
+            for (List<Position> oneBlock : allBlocks) {
+                for (Position p : oneBlock) {
+                    if (p.getX() == playerPosition.getX() && p.getY() == playerPosition.getY()) {
+                        hitBlock = true;
+                    }
+                }
             }
-        }
 
         if (hitBlock) {
-            printGameOver();
-        } else {*/
+            Main.gameOver();
+        } else {
             printPlayer(terminal);
         }
     }
