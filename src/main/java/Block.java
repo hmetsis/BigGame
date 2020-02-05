@@ -11,7 +11,7 @@ public class  Block {
 
     protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
-    protected static List<List<Position>> allBlocks = new ArrayList<>();
+    public static List<List<Position>> allBlocks = new ArrayList<>();
     protected final char blockChar = '\u2588';
 
     public Block () {
@@ -24,6 +24,8 @@ public class  Block {
             oneBlock.add(position);
             y++;
         }
+
+        allBlocks.add(oneBlock);
     }
 
     public void moveBlock (Terminal terminal) throws Exception {
@@ -32,5 +34,9 @@ public class  Block {
 
     public void printBlock (Terminal terminal) throws Exception {
 
+    }
+
+    public List<Position> getOneBlock() {
+        return oneBlock;
     }
 }
