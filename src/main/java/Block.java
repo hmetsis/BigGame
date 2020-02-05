@@ -11,7 +11,7 @@ public class  Block {
 
     protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
-    protected List<List<Position>> allBlocks = new ArrayList<>();
+    protected static List<List<Position>> allBlocks = new ArrayList<>();
     protected final char blockChar = '\u2588';
 
     public Block () {

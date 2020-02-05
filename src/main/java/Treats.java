@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Treats {
+public class Treats extends Block {
 
     protected Position treatPosition;
 
@@ -15,10 +15,10 @@ public class Treats {
         } while(checkIfBlock());
     }
 
-    public boolean checkIfBlock(List<List<Position>> allBlocks) {
+    public boolean checkIfBlock() {
         for (List<Position> oneBlock : allBlocks) {
-            for(Position p : b.) {
-                if (oneBlock.p.getY == treatPosition.getY() &&  b.p.getX == treatPosition.getX()) {
+            for(Position p : oneBlock) {
+                if (p.getY() == treatPosition.getY() &&  p.getX() == treatPosition.getX()) {
                     return true;
                 } else {
                     return false;
