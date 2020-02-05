@@ -1,5 +1,7 @@
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
+import org.w3c.dom.Text;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LyingBlock extends Block {
@@ -23,6 +25,7 @@ public class LyingBlock extends Block {
             b.setOldY(b.getY());
             b.setY(b.getY()+1);
             terminal.setCursorPosition(b.getX(), b.getY());
+            terminal.setForegroundColor(TextColor.ANSI.GREEN);
             terminal.putCharacter(blockChar);
 
             terminal.setCursorPosition(b.getX(), b.getOldY());
