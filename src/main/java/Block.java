@@ -52,7 +52,6 @@ public class  Block {
         int x = ThreadLocalRandom.current().nextInt(11, 59);
         int y = 0;
         int blockWidth = ThreadLocalRandom.current().nextInt(3, 10);
-        //blockArray = new Character[blockLength];
 
         for (int i = 0; i < blockWidth; i++) {
             Position position = new Position(x, y);
@@ -63,20 +62,15 @@ public class  Block {
 
     public void moveLying (Terminal terminal) throws Exception{
 
-        for(Block b : oneBlock) {
+        for(Position b : oneBlock) {
+            b.setOldY(b.getY());
+            b.setY(b.getY()+1);
+            terminal.setCursorPosition(b.getX(), b.getY());
+            terminal.putCharacter(blockChar);
 
+            terminal.setCursorPosition(b.getX(), b.getOldY());
+            terminal.putCharacter(' ');
         }
-
-        int y = oneBlock.get(oneBlock.size()-1).getY();
-        int x = oneBlock.get(oneBlock.size()-1).getX();
-
-        oneBlock.add(new Position(x, y+1));
-        terminal.setCursorPosition(x, y+1);
-        terminal.putCharacter(blockChar);
-
-        terminal.setCursorPosition(oneBlock.get(0).getX(), oneBlock.get(0).getY());
-        terminal.putCharacter(' ');
-        oneBlock.remove(0);
     }
 
 }
