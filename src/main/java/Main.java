@@ -25,7 +25,7 @@ public class Main {
         block.printBlock(terminal);
         Wall walls = new Wall();
         walls.printWall(terminal);
-        Player player = new Player();
+        Player player = new Player(20, 20);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(TextColor.ANSI.CYAN);

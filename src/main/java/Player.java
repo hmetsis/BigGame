@@ -6,34 +6,31 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Player {
-    private int x;
-    private int y;
-    private int oldX;
-    private int oldY;
+    private Position playerPosition;
     final char playerChar = 'X';
 
-    public Player () {
-        this.x = 20;
-        this.y = 20;
+    public Player (int x, int y) {
+        Position position = new Position(x, y);
+        playerPosition = position;
     }
 
     public void playerMove(KeyType type) {
 
-        oldX = x;
-        oldY = y;
+        playerPosition.setOldX(playerPosition.getX());
+        playerPosition.setOldY(playerPosition.getY());
 
         switch (type) {
 //            case ArrowDown:
 //                y++;
 //                break;
             case ArrowRight:
-                x++;
+                playerPosition.setX(playerPosition.getX()+1);
                 break;
 //            case ArrowUp:
 //                y--;
 //                break;
             case ArrowLeft:
-                x--;
+                playerPosition.setX(playerPosition.getX()-1);
                 break;
         }
     }
@@ -42,23 +39,23 @@ public class Player {
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
-            if (p.getX() == x && p.getY() == y) {
+            if (p.getX() == playerPosition.getX() && p.getY() == playerPosition.getY()) {
                 crashIntoWall = true;
             }
         }
 
         if (crashIntoWall) {
-            x = oldX;
-            y = oldY;
+            playerPosition.setX(playerPosition.getOldX());
+            playerPosition.setY(playerPosition.getOldY());
         } else {
             printPlayer(terminal);
         }
     }
 
     public void printPlayer(Terminal terminal) throws IOException {
-        terminal.setCursorPosition(oldX, oldY);
+        terminal.setCursorPosition(playerPosition.getOldX(), playerPosition.getOldY());
         terminal.putCharacter(' ');
-        terminal.setCursorPosition(x, y);
+        terminal.setCursorPosition(playerPosition.getX(), playerPosition.getY());
         terminal.putCharacter(playerChar);
     }
 }
