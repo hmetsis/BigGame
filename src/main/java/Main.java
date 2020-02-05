@@ -33,14 +33,19 @@ public class Main {
         KeyType type = KeyType.ArrowUp;
         KeyStroke keyStroke = null;
         terminal.flush();
+        int moveBlockSpeed = 0;
 
         boolean continueReadingInput = true;
         while (continueReadingInput) {
             Thread.sleep(400);
 
-            block.moveBlock(terminal);
 
+            if(moveBlockSpeed % 3 == 0){
+                block.moveBlock(terminal);
 
+            }
+
+            moveBlockSpeed++;
             keyStroke = terminal.pollInput();
 
             if(keyStroke!=null) {
