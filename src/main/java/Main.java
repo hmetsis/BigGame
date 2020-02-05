@@ -22,8 +22,12 @@ public class Main {
     public static void main (String [] args) throws Exception {
         terminal.setCursorVisible(false);
         paintBackground();
-        Block block = new Block();
-        block.printBlock(terminal);
+
+
+        for(int i = 0; i < 3; i++) {
+
+        }
+
         Wall walls = new Wall();
         walls.printWall(terminal);
         Player player = new Player(20, 20);
@@ -32,30 +36,24 @@ public class Main {
         terminal.setBackgroundColor(TextColor.ANSI.CYAN);
 
         KeyType type = KeyType.ArrowUp;
-        KeyStroke keyStroke = null;
+        KeyStroke keyStroke;
         terminal.flush();
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
             Thread.sleep(400);
 
-
             if(moveBlockSpeed % 3 == 0){
                 block.moveBlock(terminal);
-
             }
 
             moveBlockSpeed++;
             keyStroke = terminal.pollInput();
 
             if(keyStroke!=null) {
-
-
-
                 type = keyStroke.getKeyType();
-
-
             }
+
             player.playerMove(type);
             player.checkIfWall(walls, terminal);
 
@@ -147,4 +145,3 @@ public class Main {
         }
         terminal.flush();
     }
-}
