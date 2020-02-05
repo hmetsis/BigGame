@@ -5,12 +5,14 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
     public static boolean continueReadingInput = true;
+    static List<Block> allBlocks = new ArrayList<>();
 
     static {
         try {
@@ -27,7 +29,12 @@ public class Main {
         Block block = null;
 
         for(int i = 0; i < 3; i++) {
-            block = new Block();
+            if(i%2 == 0) {
+                block = new StandingBlock();
+            } else {
+                block = new LyingBlock();
+            }
+            allBlocks.add(block);
         }
 
         Wall walls = new Wall();
@@ -46,9 +53,8 @@ public class Main {
             Thread.sleep(400);
 
             if(moveBlockSpeed % 3 == 0) {
-                for (int i = 0; i < Block.allBlocks.size(); i++) {
-                        Block block = (Block) Block.allBlocks.get(1);
-                        block.moveBlock(terminal);
+                for (int i = 0; i < allBlocks.size(); i++) {
+                    allBlocks.get(i).moveBlock(terminal);
                     }
                 }
 
@@ -148,5 +154,5 @@ public class Main {
         }
         gameOverX = 3;
         }
-        terminal.flush();
+        //terminal.flush();
     }

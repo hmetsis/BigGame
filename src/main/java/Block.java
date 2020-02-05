@@ -11,7 +11,6 @@ public class  Block {
 
     protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
-    public static List<List<Position>> allBlocks = new ArrayList<>();
     protected final char blockChar = '\u2588';
 
     public Block () {
@@ -20,12 +19,10 @@ public class  Block {
         int blockLength = ThreadLocalRandom.current().nextInt(3, 10);
 
         for (int i = 0; i < blockLength; i++) {
-            Position position = new Position(x, y-blockLength);
+            position = new Position(x, y-blockLength);
             oneBlock.add(position);
             y++;
         }
-
-        allBlocks.add(oneBlock);
     }
 
     public void moveBlock (Terminal terminal) throws Exception {
