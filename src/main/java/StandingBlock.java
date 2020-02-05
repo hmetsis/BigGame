@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
         public StandingBlock () {
             int x = ThreadLocalRandom.current().nextInt(11, 59);
             int y = 0;
-            int blockLength = ThreadLocalRandom.current().nextInt(3, 10);
+            int blockLength = ThreadLocalRandom.current().nextInt(3, 6);
 
             for (int i = 0; i < blockLength; i++) {
                 Position position = new Position(x, y-blockLength);
