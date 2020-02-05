@@ -3,7 +3,6 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.sun.media.jfxmedia.events.PlayerEvent;
 
 import java.io.IOException;
 
@@ -31,23 +30,27 @@ public class Main {
 
         terminal.setBackgroundColor(TextColor.ANSI.CYAN);
 
+        KeyType type = KeyType.ArrowUp;
+        KeyStroke keyStroke = null;
         terminal.flush();
 
         boolean continueReadingInput = true;
         while (continueReadingInput) {
-//            Thread.sleep(300);
-//            //keyStroke = terminal.pollInput();
+            Thread.sleep(400);
+
             block.moveBlock(terminal);
 
-            KeyStroke keyStroke = null;
 
-            do {
-                Thread.sleep(5); // might throw InterruptedException
-                keyStroke = terminal.pollInput();
-            } while (keyStroke == null);
+            keyStroke = terminal.pollInput();
 
-            KeyType type = keyStroke.getKeyType();
+            if(keyStroke!=null) {
 
+
+
+                type = keyStroke.getKeyType();
+
+
+            }
             player.playerMove(type);
             player.checkIfWall(walls, terminal);
 
@@ -71,7 +74,7 @@ public class Main {
                 terminal.putCharacter(' ');
             }
             terminal.flush();
-            }
-
         }
+
+    }
 }
