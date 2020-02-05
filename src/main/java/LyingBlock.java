@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -33,6 +34,7 @@ public class LyingBlock extends Block {
     public void printBlock (Terminal terminal) throws Exception {
         for (Position position : oneBlock) {
             terminal.setCursorPosition(position.getX(), position.getY());
+            terminal.setForegroundColor(TextColor.ANSI.CYAN);
             terminal.putCharacter(blockChar);
         }
     }

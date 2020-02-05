@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class  Block {
 
-    protected Position position;
+    public Position position;
     protected List<Position> oneBlock = new ArrayList<>();
     protected final char blockChar = '\u2588';
 
