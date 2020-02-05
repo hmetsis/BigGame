@@ -21,7 +21,7 @@ public class Block {
         //blockArray = new Character[blockLength];
 
         for (int i = 0; i < blockLength; i++) {
-            Position position = new Position(x, y);
+            Position position = new Position(x, y-blockLength);
             block.add(position);
             y++;
         }
