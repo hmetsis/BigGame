@@ -55,23 +55,27 @@ public class Player {
         for (Position p : walls.getWall()) {
            if(playerPosition[0].getX()>30){
                if (p.getX() == playerPosition[0].getX()+3) {
-               for (int j = 0; j < playerGraphic.length ; j++) { playerPosition[j].setX(playerPosition[j].getOldX());
-               playerPosition[j].setY(playerPosition[j].getOldY());
-               crashIntoWall = true;
-           }}
+                   for (int j = 0; j < playerGraphic.length ; j++) {
+                       playerPosition[j].setX(playerPosition[j].getOldX());
+                       playerPosition[j].setY(playerPosition[j].getOldY());
+                       crashIntoWall = true;
+                     }
+               }
+
            }
            else{
-            if (p.getX() == playerPosition[0].getX()) {
-                for (int k = 0; k < playerGraphic.length ; k++) { playerPosition[k].setX(playerPosition[k].getOldX());
-                playerPosition[k].setY(playerPosition[k].getOldY());
-                crashIntoWall = true;
-            }}}
-        }
-
+                 if (p.getX() == playerPosition[0].getX()) {
+                    for (int k = 0; k < playerGraphic.length ; k++) {
+                        playerPosition[k].setX(playerPosition[k].getOldX());
+                        playerPosition[k].setY(playerPosition[k].getOldY());
+                        crashIntoWall = true;
+                 }
+                     }
+           }
+            }
         if (crashIntoWall) {
-       /*     playerPosition[i].setX(playerPosition[i].getOldX());
-            playerPosition[i].setY(playerPosition[i].getOldY());*/
-        } else {
+        }
+        else {
             printPlayer(terminal);
         }
     }
