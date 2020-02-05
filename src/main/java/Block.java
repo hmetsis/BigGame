@@ -12,7 +12,7 @@ public class  Block {
     private Position position;
     private Character [] blockArray;
     private List<Position> oneBlock = new ArrayList<>();
-    private List<List<Position>> allBlocks = new ArrayList<>();
+    public static List<List<Position>> allBlocks = new ArrayList<>();
     final char blockChar = '\u2588';
 
     public Block () {
@@ -26,6 +26,7 @@ public class  Block {
             oneBlock.add(position);
             y++;
         }
+        allBlocks.add(oneBlock);
     }
 
 
@@ -79,4 +80,19 @@ public class  Block {
         oneBlock.remove(0);
     }
 
+    public static List<List<Position>> getAllBlocks() {
+        return allBlocks;
+    }
+
+    public static void setAllBlocks(List<List<Position>> allBlocks) {
+        Block.allBlocks = allBlocks;
+    }
+
+    public List<Position> getOneBlock() {
+        return oneBlock;
+    }
+
+    public void setOneBlock(List<Position> oneBlock) {
+        this.oneBlock = oneBlock;
+    }
 }
