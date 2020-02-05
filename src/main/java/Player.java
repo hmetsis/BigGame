@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Player {
-    private Position [] playerPosition = new Position[4];
+    protected Position [] playerPosition = new Position[4];
     final char playerChar = 'X';
     int [] playerGraphic = new int[4];
 
@@ -53,34 +53,44 @@ public class Player {
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
-            if (p.getX() == playerPosition[i].getX() && p.getY() == playerPosition[i].getY()) {
+           if(playerPosition[0].getX()>30){
+               if (p.getX() == playerPosition[0].getX()+3) {
+               for (int j = 0; j < playerGraphic.length ; j++) { playerPosition[j].setX(playerPosition[j].getOldX());
+               playerPosition[j].setY(playerPosition[j].getOldY());
+               crashIntoWall = true;
+           }}
+           }
+           else{
+            if (p.getX() == playerPosition[0].getX()) {
+                for (int k = 0; k < playerGraphic.length ; k++) { playerPosition[k].setX(playerPosition[k].getOldX());
+                playerPosition[k].setY(playerPosition[k].getOldY());
                 crashIntoWall = true;
-            }
+            }}}
         }
 
         if (crashIntoWall) {
-            playerPosition[i].setX(playerPosition[i].getOldX());
-            playerPosition[i].setY(playerPosition[i].getOldY());
+       /*     playerPosition[i].setX(playerPosition[i].getOldX());
+            playerPosition[i].setY(playerPosition[i].getOldY());*/
         } else {
             printPlayer(terminal);
         }
     }
-    }
-    public void hitBlock(List<List<Position>> allBlocks, Terminal terminal) throws Exception {
+    }//List<List<Position>> allBlocks,
+    public void hitBlock(Terminal terminal) throws Exception {
         for (int i = 0; i < playerGraphic.length ; i++) {
-
-
-        boolean hitBlock = false;
-            for (List<Position> oneBlock : allBlocks) {
-                for (Position p : oneBlock) {
-                    if (p.getX() == playerPosition[i].getX() && p.getY() == playerPosition[i].getY()) {
+            boolean hitBlock = false;
+            for (Block block : Main.allBlocks) {
+                for (int j = 0; j < block.getOneBlock().size(); j++) {
+                    if (block.position.getX() == playerPosition[i].getX() && block.position.getY() == playerPosition[i].getY()) {
                         hitBlock = true;
+                        break;
                     }
                 }
             }
 
         if (hitBlock) {
             Main.gameOver();
+            System.out.println("Game over");
         } else {
             printPlayer(terminal);
         }

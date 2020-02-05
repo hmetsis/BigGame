@@ -7,12 +7,13 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
     public static boolean continueReadingInput = true;
-    static List<Block> allBlocks = new ArrayList<>();
+    public static List<Block> allBlocks = new ArrayList<>();
 
     static {
         try {
@@ -50,31 +51,39 @@ public class Main {
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
-            Thread.sleep(400);
+            Thread.sleep(10);
 
-            if(moveBlockSpeed % 3 == 0) {
+            if (moveBlockSpeed % 120 == 0) {
                 for (int i = 0; i < allBlocks.size(); i++) {
                     allBlocks.get(i).moveBlock(terminal);
-                    }
                 }
+                moveBlockSpeed = 0;
+            }
 
             moveBlockSpeed++;
             keyStroke = terminal.pollInput();
 
-            if(keyStroke!=null) {
+            if (keyStroke != null) {
                 type = keyStroke.getKeyType();
             }
 
             player.playerMove(type);
             player.checkIfWall(walls, terminal);
-
+            player.hitBlock(terminal);
+            if (moveBlockSpeed % 200 == 0) {
+                int blockTypeChooser = ThreadLocalRandom.current().nextInt(1, 3);
+                if (blockTypeChooser % 2 == 0) {
+                    allBlocks.add(new StandingBlock());
+                } else {
+                    allBlocks.add(new LyingBlock());
+                }
+            }
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
 //            terminal.putCharacter(player);
 //            terminal.setCursorPosition(oldX, oldY);
 //            terminal.putCharacter(' ');
             terminal.flush();
-
         }
     }
 
