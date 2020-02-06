@@ -99,14 +99,14 @@ public class Player {
 
     public void hitBlock(Terminal terminal) throws Exception {
         hitBlock = false;
-        outer: for (int i = 0; i < 7 ; i++) {
+        for (int i = 0; i < 7 ; i++) {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
                     if ((p.getY() == 21 || p.getY() == 22) && p.getX() == playerPosition[i].getX()) {
 //                for (int j = 0; j < block.getOneBlock().size(); j++) {
 //                    if (playerPosition[i] == block.getOneBlock().get(j)) {
                         hitBlock = true;
-                        break;// outer;
+                        break;
                     }
                 }
             }
