@@ -11,7 +11,7 @@ public class Treats extends Block {
 
     public Treats() {
         do {
-            int x = ThreadLocalRandom.current().nextInt(11, 59);
+            int x = ThreadLocalRandom.current().nextInt(6, 64);
             int y = 0;
 
             treatPosition = new Position(x, y);

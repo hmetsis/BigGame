@@ -41,9 +41,6 @@ public class Main {
 
         otherSoundsObject.playBackgroundMusic(filepath2);
 
-
-
-
         terminal.setCursorVisible(false);
         paintBackground();
 
@@ -80,20 +77,20 @@ public class Main {
 
             player.checkIfWall(walls, terminal);
             player.hitBlock(terminal);
-            if(player.hitBlock==true){
+            if (player.hitBlock) {
                 otherSoundsObject.stopBackgroundMusic(filepath2);
                 otherSoundsObject.playMusic(filepath3);
                 otherSoundsObject.playGameOver(filepath4);
             }
 
-            if(allTreats.get(0).treatPosition.getY() == 21) {
+            if (allTreats.get(0).treatPosition.getY() == 24) {
                 terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
                 terminal.putCharacter(' ');
                 allTreats.remove(0);
             }
 
-            if(player.hitTreat(allTreats.get(0))) {
-                if(allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3){
+            if (player.hitTreat(allTreats.get(0))) {
+                if (allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3) {
                     Main.lives++;
                 }
                 allTreats.remove(0);
@@ -112,7 +109,9 @@ public class Main {
             }
 
 
-            if (moveBlockSpeed%70 == 0) {
+            if (moveBlockSpeed % 150 == 0) {
+                blockCreator();
+
                 Treats treat = new Treats();
                 allTreats.add(treat);
 
@@ -134,21 +133,21 @@ public class Main {
 
     public static void paintBackground () throws IOException {
         terminal.clearScreen();
-        for(int i = 0; i < 10; i++) {
-            for (int j = 0; j < 60; j++) {
+        for(int i = 0; i < 5; i++) {
+            for (int j = 0; j < 65; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(TextColor.ANSI.RED);
                 terminal.putCharacter('\u25A1');
             }
         }
-        for(int i = 11; i < 60; i++) {
+        for(int i = 6; i < 65; i++) {
             for (int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
                 terminal.putCharacter(' ');
             }
         }
-        for(int i = 60; i < 80; i++) {
+        for(int i = 65; i < 80; i++) {
             for(int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(TextColor.ANSI.RED);
@@ -161,7 +160,7 @@ public class Main {
 
     public static void printScore() throws Exception {
         String printScore = "Score: " + score;
-        terminal.setCursorPosition(63, 10);
+        terminal.setCursorPosition(68, 12);
         terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
         terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
@@ -172,7 +171,7 @@ public class Main {
 
     public static void printLives() throws Exception {
         String printLives = "Lives: ";
-        terminal.setCursorPosition(63, 12);
+        terminal.setCursorPosition(68, 14);
         terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
         terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
@@ -213,41 +212,43 @@ public class Main {
     }
 
     public static void printGameOver (Terminal terminal) throws Exception {
+        terminal.setForegroundColor(new TextColor.RGB(255,255,255));
         String gameOver1 = "  ____    _    __  __ _____    _____     _______ ____  ";
         String gameOver2 = " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ";
         String gameOver3 = "| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |";
         String gameOver4 = "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ";
         String gameOver5 = " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\";
 
-        int gameOverX = 11;
+        String [][] GameOver = new String[22][58];
+        int gameOverX = 6;
         int gameOverY = 6;
         for (char c : gameOver1.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 7;
         for (char c : gameOver2.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 8;
         for (char c : gameOver3.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 9;
         for (char c : gameOver4.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 10;
         for (char c : gameOver5.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);

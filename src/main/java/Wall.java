@@ -11,8 +11,8 @@ public class Wall {
 
     public Wall () {
         for(int i = 0; i < 24; i++) {
-            wall.add(new Position(10, i));
-            wall.add(new Position(60, i));
+            wall.add(new Position(5, i));
+            wall.add(new Position(65, i));
         }
     }
 
