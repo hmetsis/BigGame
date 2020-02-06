@@ -102,7 +102,7 @@ public class Player {
         boolean isHitting = false;
 
         for (int i = 0; i < playerGraphic.length ; i++) {
-            if (playerPosition[i].getX() == treat.position.getX() && playerPosition[i].getY() == treat.position.getY()) {
+                if (playerPosition[i].getX() == treat.treatPosition.getX() && playerPosition[i].getY() == treat.treatPosition.getY()) {
                 isHitting = true; }
         }
         return isHitting;

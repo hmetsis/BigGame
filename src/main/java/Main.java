@@ -50,7 +50,7 @@ public class Main {
 
         terminal.setBackgroundColor(TextColor.ANSI.CYAN);
 
-        KeyType type = KeyType.ArrowUp;
+        KeyType type;
         KeyStroke keyStroke;
         terminal.flush();
         int moveBlockSpeed = 0;
@@ -58,6 +58,28 @@ public class Main {
         while (continueReadingInput) {
             terminal.setBackgroundColor(TextColor.ANSI.CYAN);
             Thread.sleep(50);
+            keyStroke = null;
+
+            keyStroke = terminal.pollInput();
+
+            if (keyStroke != null) {
+                type = keyStroke.getKeyType();
+                player.playerMove(type);
+            }
+
+            player.checkIfWall(walls, terminal);
+            player.hitBlock(terminal);
+
+            if(allTreats.get(0).treatPosition.getY() == 21) {
+                terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
+                terminal.putCharacter(' ');
+                allTreats.remove(0);
+            }
+
+            if(player.hitTreat(allTreats.get(0))) {
+                allTreats.remove(0);
+                score++;
+            }
 
             if (moveBlockSpeed % 30 == 0) {
                 for (int i = 0; i < allBlocks.size(); i++) {
@@ -69,16 +91,6 @@ public class Main {
                 }
             }
 
-            moveBlockSpeed++;
-            keyStroke = terminal.pollInput();
-
-            if (keyStroke != null) {
-                type = keyStroke.getKeyType();
-            }
-
-            player.playerMove(type);
-            player.checkIfWall(walls, terminal);
-            player.hitBlock(terminal);
 
             if (moveBlockSpeed%50 == 0) {
                 int blockTypeChooser = ThreadLocalRandom.current().nextInt(1, 3);
@@ -94,9 +106,8 @@ public class Main {
                 allTreats.add(treat);
             }
 
-            if(player.hitTreat(allTreats.get(0))) {
-                score++;
-            }
+            moveBlockSpeed++;
+
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
 //            terminal.putCharacter(player);
