@@ -10,14 +10,25 @@ import java.util.List;
 public class Player {
 
     final char playerChar = '█';
-    String [] playerGraphic = new String[]{"█"," " ," " , " " ," " ,"█", "█", "█", "█"," " ," " , "█","█","█"," "};
+
+    String [] playerGraphic = new String[]{"█"," " ," " , " " ," " ," ","█"," ","█"," ", "█"," ", "█"," " ," " ," ", "█","█","█"," ", " ",};
     protected Position [] playerPosition = new Position[playerGraphic.length];
     boolean hitBlock;
 
     public Player (int x, int y) {
-        for (int i = 0; i < playerGraphic.length; i++) {
+        for (int i = 0; i < 8; i++) {
             Position position = new Position(x++, y);
             playerPosition[i] = position;
+        } int k = 1;
+        for (int i = 8; i < 14; i++) {
+            Position position = new Position(playerPosition[k].getX(), y);
+            playerPosition[i] = position;
+            k++;
+        } int c = 0;
+        for (int i = 14; i < playerGraphic.length; i++) {
+            Position position = new Position(playerPosition[c].getX(), y);
+            playerPosition[i] = position;
+            c++;
         }
     }
 
@@ -47,13 +58,13 @@ public class Player {
     }}
 
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
-        for (int i = 0; i < playerGraphic.length ; i++) {
+        for (int i = 0; i < 8 ; i++) {
 
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
            if(playerPosition[0].getX()>30){
-               if (p.getX() == playerPosition[0].getX()+12) {
+               if (p.getX() == playerPosition[0].getX()+6) {
                    for (int j = 0; j < playerGraphic.length ; j++) {
                        playerPosition[j].setX(playerPosition[j].getOldX());
                        playerPosition[j].setY(playerPosition[j].getOldY());
@@ -120,26 +131,46 @@ public class Player {
     public void printPlayer(Terminal terminal) throws IOException {
 
 
-        for (int i = 0; i < playerGraphic.length ; i++) {
+        for (int i = 0; i < 8 ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
             terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
             terminal.putCharacter(' ');
         }
 
+        for (int i = 0; i < 8 ; i++) {
+            playerPosition[i].setY(21);
+            terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
+            terminal.setForegroundColor(TextColor.ANSI.BLUE);
+            terminal.putCharacter(playerGraphic[i].charAt(0));
+        }
 
+        for (int i = 8; i < 14 ; i++) {
+            terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
+            terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+            terminal.putCharacter(' ');
+        }
 
-        for (int i = 0; i < 3 ; i++) {
-        terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
-        terminal.setForegroundColor(TextColor.ANSI.BLUE);
-        playerPosition[i].setY(18+i);
-
-
-        if(i % 3 == 0){
-      terminal.putCharacter(playerChar);}
-            else {
-                terminal.putCharacter('█');
-                terminal.setForegroundColor(TextColor.ANSI.CYAN);
+            for (int q = 8; q < 14 ; q++) {
+                playerPosition[q].setY(22);
+                terminal.setCursorPosition(playerPosition[q].getX(), playerPosition[q].getY());
+                terminal.setForegroundColor(TextColor.ANSI.BLUE);
+                terminal.putCharacter(playerGraphic[q].charAt(0));
             }
+
+        for (int i = 14; i < playerGraphic.length ; i++) {
+            terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
+            terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+            terminal.putCharacter(' ');
+        }
+
+                for (int m = 14; m < playerGraphic.length ; m++) {
+                    playerPosition[m].setY(23);
+                    terminal.setCursorPosition(playerPosition[m].getX(), playerPosition[m].getY());
+                    terminal.setForegroundColor(TextColor.ANSI.BLUE);
+                    terminal.putCharacter(playerGraphic[m].charAt(0));
+
+
+
 
     }
 }
