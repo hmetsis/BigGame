@@ -32,13 +32,14 @@ public class Main {
 
         String filepath = "src/Apple_Bite.wav";
         String filepath2 = "src/BackMusic.wav";
-        String filepath3 = "src/BlockInHead.wav";
+        String filepath3 = "src/BlockInHead";
+        String filepath4 = "src/nsmb_game_over.wav";
 
-        MusicStuff musicObject = new MusicStuff();
-        MusicStuff musicObject2 = new MusicStuff();
+        MusicStuff eatAppleObject = new MusicStuff();
+        MusicStuff otherSoundsObject = new MusicStuff();
 
+        otherSoundsObject.playBackgroundMusic(filepath2);
 
-        musicObject2.playBackgroundMusic(filepath2);
 
 
 
@@ -76,6 +77,11 @@ public class Main {
 
             player.checkIfWall(walls, terminal);
             player.hitBlock(terminal);
+            if(player.hitBlock==true){
+                otherSoundsObject.stopBackgroundMusic(filepath2);
+                otherSoundsObject.playMusic(filepath3);
+                otherSoundsObject.playGameOver(filepath4);
+            }
 
             if(allTreats.get(0).treatPosition.getY() == 21) {
                 terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
@@ -86,7 +92,7 @@ public class Main {
             if(player.hitTreat(allTreats.get(0))) {
                 allTreats.remove(0);
                 score++;
-                musicObject.playMusic(filepath);
+                eatAppleObject.playMusic(filepath);
             }
 
             if (moveBlockSpeed % 30 == 0) {
