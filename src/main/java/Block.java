@@ -36,4 +36,21 @@ public class  Block {
     public List<Position> getOneBlock() {
         return oneBlock;
     }
+
+    public static void blockCreator() {
+        Block block = null;
+        for(int i = 0; i < 2; i++) {
+            int b = ThreadLocalRandom.current().nextInt(1, 3);
+            switch (b) {
+                case 1:     block = new Block3by3();
+                    break;
+                case 2:     block = new Block4by2();
+                    break;
+                case 3:     block = new Block8by2();
+                    break;
+            }
+            Main.allBlocks.add(block);
+        }
+
+    }
 }

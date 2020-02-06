@@ -29,16 +29,7 @@ public class Main {
         terminal.setCursorVisible(false);
         paintBackground();
 
-        Block block = null;
-
-        for(int i = 0; i < 3; i++) {
-            if(i%2 == 0) {
-                block = new Block4by2();
-            } else {
-                block = new Block3by3();
-            }
-            allBlocks.add(block);
-        }
+        blockCreator();
 
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
@@ -80,15 +71,8 @@ public class Main {
             player.checkIfWall(walls, terminal);
             player.hitBlock(terminal);
 
-            if (moveBlockSpeed%50 == 0) {
-                int blockTypeChooser = ThreadLocalRandom.current().nextInt(1, 3);
-                if (blockTypeChooser % 2 == 0) {
-                    Block tempBlock = new StandingBlock();
-                    allBlocks.add(tempBlock);
-                } else {
-                    Block tempBlock = new LyingBlock();
-                    allBlocks.add(tempBlock);
-                }
+            if (moveBlockSpeed%70 == 0) {
+                blockCreator();
 
                 Treats treat = new Treats();
                 allTreats.add(treat);
@@ -144,6 +128,25 @@ public class Main {
             terminal.putCharacter(printScore.charAt(i));
         }
     }
+    public static void blockCreator() {
+        Block block = null;
+            for(int i = 0; i < 2; i++) {
+                int b = ThreadLocalRandom.current().nextInt(1, 3);
+                switch (b) {
+                    case 1:
+                        block = new Block3by3();
+                        break;
+                    case 2:
+                        block = new Block4by2();
+                        break;
+                    case 3:
+                        block = new Block8by2();
+                        break;
+                }
+                allBlocks.add(block);
+            }
+    }
+
 
     public static void gameOver() throws Exception {
         continueReadingInput = false;
