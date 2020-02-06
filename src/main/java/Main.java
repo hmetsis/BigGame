@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
+
+
+
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
     public static boolean continueReadingInput = true;
@@ -26,6 +29,12 @@ public class Main {
     }
 
     public static void main (String [] args) throws Exception {
+
+        String filepath = "src/epicSound.wav";
+
+        musicStuff musicObject = new musicStuff();
+        musicObject.playMusic(filepath);
+
         terminal.setCursorVisible(false);
         paintBackground();
 
