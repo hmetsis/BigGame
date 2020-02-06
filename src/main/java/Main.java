@@ -29,16 +29,7 @@ public class Main {
         terminal.setCursorVisible(false);
         paintBackground();
 
-        Block block = null;
-
-        for(int i = 0; i < 3; i++) {
-            if(i%2 == 0) {
-                block = new Block4by2();
-            } else {
-                block = new Block3by3();
-            }
-            allBlocks.add(block);
-        }
+        blockCreator();
 
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
@@ -50,7 +41,7 @@ public class Main {
 
         terminal.setBackgroundColor(TextColor.ANSI.CYAN);
 
-        KeyType type = KeyType.ArrowUp;
+        KeyType type;
         KeyStroke keyStroke;
         terminal.flush();
         int moveBlockSpeed = 0;
@@ -58,6 +49,28 @@ public class Main {
         while (continueReadingInput) {
             terminal.setBackgroundColor(TextColor.ANSI.CYAN);
             Thread.sleep(50);
+            keyStroke = null;
+
+            keyStroke = terminal.pollInput();
+
+            if (keyStroke != null) {
+                type = keyStroke.getKeyType();
+                player.playerMove(type);
+            }
+
+            player.checkIfWall(walls, terminal);
+            player.hitBlock(terminal);
+
+            if(allTreats.get(0).treatPosition.getY() == 21) {
+                terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
+                terminal.putCharacter(' ');
+                allTreats.remove(0);
+            }
+
+            if(player.hitTreat(allTreats.get(0))) {
+                allTreats.remove(0);
+                score++;
+            }
 
             if (moveBlockSpeed % 30 == 0) {
                 for (int i = 0; i < allBlocks.size(); i++) {
@@ -69,34 +82,16 @@ public class Main {
                 }
             }
 
-            moveBlockSpeed++;
-            keyStroke = terminal.pollInput();
 
-            if (keyStroke != null) {
-                type = keyStroke.getKeyType();
-            }
-
-            player.playerMove(type);
-            player.checkIfWall(walls, terminal);
-            player.hitBlock(terminal);
-
-            if (moveBlockSpeed%50 == 0) {
-                int blockTypeChooser = ThreadLocalRandom.current().nextInt(1, 3);
-                if (blockTypeChooser % 2 == 0) {
-                    Block tempBlock = new StandingBlock();
-                    allBlocks.add(tempBlock);
-                } else {
-                    Block tempBlock = new LyingBlock();
-                    allBlocks.add(tempBlock);
-                }
+            if (moveBlockSpeed%70 == 0) {
+                blockCreator();
 
                 Treats treat = new Treats();
                 allTreats.add(treat);
             }
 
-            if(player.hitTreat(allTreats.get(0))) {
-                score++;
-            }
+            moveBlockSpeed++;
+
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
 //            terminal.putCharacter(player);
@@ -144,6 +139,25 @@ public class Main {
             terminal.putCharacter(printScore.charAt(i));
         }
     }
+    public static void blockCreator() {
+        Block block = null;
+            for(int i = 0; i < 2; i++) {
+                int b = ThreadLocalRandom.current().nextInt(1, 3);
+                switch (b) {
+                    case 1:
+                        block = new Block3by3();
+                        break;
+                    case 2:
+                        block = new Block4by2();
+                        break;
+                    case 3:
+                        block = new Block8by2();
+                        break;
+                }
+                allBlocks.add(block);
+            }
+    }
+
 
     public static void gameOver() throws Exception {
         continueReadingInput = false;
