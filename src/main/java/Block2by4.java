@@ -10,13 +10,13 @@ public class Block2by4 extends Block{
     protected List<Position> oneBlock = new ArrayList<>();
     protected final char blockChar = '\u25A1';
 
-    public Block3by3 () {
-        int x = ThreadLocalRandom.current().nextInt(11, 59);
+    public Block2by4 () {
+        int x = ThreadLocalRandom.current().nextInt(11, 55);
         int backToX = x;
         int y = 0;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 4; j++) {
                 Position position = new Position(x, y);
                 oneBlock.add(position);
                 x++;}
@@ -29,13 +29,15 @@ public class Block2by4 extends Block{
     public void moveBlock (Terminal terminal) throws Exception{
         for(Position b : oneBlock) {
             b.setOldY(b.getY());
-            b.setY(b.getY()+3);
+            b.setY(b.getY()+2);
             terminal.setCursorPosition(b.getX(), b.getY());
             terminal.setBackgroundColor(TextColor.ANSI.RED);
             terminal.setForegroundColor(TextColor.ANSI.WHITE);
             terminal.putCharacter(blockChar);
 
             terminal.setCursorPosition(b.getX(), b.getOldY());
+            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+            terminal.setForegroundColor(TextColor.ANSI.WHITE);
             terminal.putCharacter(' ');
         }
     }

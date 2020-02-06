@@ -8,10 +8,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Block3by3 extends Block{
     protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
-    protected final char blockChar = '\u2588';
+    protected final char blockChar = '\u25A1';
 
     public Block3by3 () {
-        int x = ThreadLocalRandom.current().nextInt(11, 59);
+        int x = ThreadLocalRandom.current().nextInt(11, 56);
         int backToX = x;
         int y = 0;
 
@@ -31,10 +31,13 @@ public class Block3by3 extends Block{
             b.setOldY(b.getY());
             b.setY(b.getY()+3);
             terminal.setCursorPosition(b.getX(), b.getY());
-            terminal.setForegroundColor(TextColor.ANSI.GREEN);
+            terminal.setBackgroundColor(TextColor.ANSI.RED);
+            terminal.setForegroundColor(TextColor.ANSI.WHITE);
             terminal.putCharacter(blockChar);
 
             terminal.setCursorPosition(b.getX(), b.getOldY());
+            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+            terminal.setForegroundColor(TextColor.ANSI.WHITE);
             terminal.putCharacter(' ');
         }
     }
@@ -45,7 +48,7 @@ public class Block3by3 extends Block{
             terminal.setCursorPosition(position.getX(), position.getY());
             terminal.setBackgroundColor(TextColor.ANSI.RED);
             terminal.setForegroundColor(TextColor.ANSI.WHITE);
-            terminal.putCharacter('\u25A1');
+            terminal.putCharacter(blockChar);
         }
     }
 
