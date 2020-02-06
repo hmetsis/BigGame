@@ -30,10 +30,13 @@ public class Main {
 
     public static void main (String [] args) throws Exception {
 
-        String filepath = "src/epicSound.wav";
+        String filepath = "src/Apple_Bite.wav";
+        String filepath2 = "src/BackMusic.wav";
 
-        musicStuff musicObject = new musicStuff();
-        musicObject.playMusic(filepath);
+        MusicStuff musicObject = new MusicStuff();
+        MusicStuff musicObject2 = new MusicStuff();
+        musicObject2.playBackgroundMusic(filepath2);
+
 
         terminal.setCursorVisible(false);
         paintBackground();
@@ -79,6 +82,7 @@ public class Main {
             if(player.hitTreat(allTreats.get(0))) {
                 allTreats.remove(0);
                 score++;
+                musicObject.playMusic(filepath);
             }
 
             if (moveBlockSpeed % 30 == 0) {
