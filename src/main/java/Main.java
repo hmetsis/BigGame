@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
+
+
+
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
     public static boolean continueReadingInput = true;
@@ -26,6 +29,15 @@ public class Main {
     }
 
     public static void main (String [] args) throws Exception {
+
+        String filepath = "src/Apple_Bite.wav";
+        String filepath2 = "src/BackMusic.wav";
+
+        MusicStuff musicObject = new MusicStuff();
+        MusicStuff musicObject2 = new MusicStuff();
+        musicObject2.playBackgroundMusic(filepath2);
+
+
         terminal.setCursorVisible(false);
         paintBackground();
 
@@ -70,6 +82,7 @@ public class Main {
             if(player.hitTreat(allTreats.get(0))) {
                 allTreats.remove(0);
                 score++;
+                musicObject.playMusic(filepath);
             }
 
             if (moveBlockSpeed % 30 == 0) {
@@ -98,6 +111,7 @@ public class Main {
 //            terminal.setCursorPosition(oldX, oldY);
 //            terminal.putCharacter(' ');
             printScore();
+            printLives();
             terminal.flush();
         }
     }
@@ -139,6 +153,24 @@ public class Main {
             terminal.putCharacter(printScore.charAt(i));
         }
     }
+
+    public static void printLives() throws Exception {
+        String printLives = "Lives: ";
+        terminal.setCursorPosition(63, 12);
+        terminal.setBackgroundColor(TextColor.ANSI.RED);
+        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+
+        for(int i = 0; i < printLives.length(); i++) {
+            terminal.putCharacter(printLives.charAt(i));
+        }
+
+        for(int i = 0; i < 3; i++) {
+            terminal.putCharacter('\u2665');
+            terminal.putCharacter(' ');
+        }
+
+    }
+
     public static void blockCreator() {
         Block block = null;
             for(int i = 0; i < 2; i++) {
