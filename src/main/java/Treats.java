@@ -1,13 +1,12 @@
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
-
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Treats extends Block {
 
     protected Position treatPosition;
     protected final char treatChar = 'O';
+    protected KindOfTreat kindOfTreat;
 
     public Treats() {
         do {
@@ -16,27 +15,33 @@ public class Treats extends Block {
 
             treatPosition = new Position(x, y);
 
-        } while (checkIfBlock());
+            int i = ThreadLocalRandom.current().nextInt(1, 15);
+            if (i == 9) {
+                kindOfTreat = KindOfTreat.EXTRA_LIVES;
+            } else {
+                kindOfTreat = KindOfTreat.POINT;
+            }
+        } while (checkIfBlock()) ;
     }
 
-    public boolean checkIfBlock() {
-        boolean crashing = false;
+        public boolean checkIfBlock () {
+            boolean crashing = false;
 
-        for (Block oneBlock : Main.allBlocks) {
-            for (Position p : oneBlock.getOneBlock()) {
-                if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
-                    crashing = true;
-                } else {
-                    crashing = false;
+            for (Block oneBlock : Main.allBlocks) {
+                for (Position p : oneBlock.getOneBlock()) {
+                    if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
+                        crashing = true;
+                    } else {
+                        crashing = false;
+                    }
                 }
             }
+            return crashing;
         }
-        return crashing;
-    }
 
-    public void moveTreat(Terminal terminal) throws Exception {
+        public void moveTreat (Terminal terminal) throws Exception {
             treatPosition.setOldY(treatPosition.getY());
-            treatPosition.setY(treatPosition.getY()+1);
+            treatPosition.setY(treatPosition.getY() + 1);
 
             terminal.setCursorPosition(treatPosition.getX(), treatPosition.getY());
             terminal.setForegroundColor(TextColor.ANSI.GREEN);
@@ -44,6 +49,10 @@ public class Treats extends Block {
 
             terminal.setCursorPosition(treatPosition.getX(), treatPosition.getOldY());
             terminal.putCharacter(' ');
+        }
     }
 
+
+enum KindOfTreat {
+    EXTRA_LIVES, POINT
 }
