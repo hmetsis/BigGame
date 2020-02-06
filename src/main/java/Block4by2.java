@@ -59,21 +59,6 @@ public class Block4by2 extends Block{
 //            terminal.putCharacter('\u25A1');
 //        }
 
-    public boolean checkIfTreat() {
-        boolean crashing = false;
-
-        for (Treat treat : Main.allBlocks) {
-            for (Position p : oneBlock.getOneBlock()) {
-                if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
-                    crashing = true;
-                } else {
-                    crashing = false;
-                }
-            }
-        }
-        return crashing;
-    }
-
     public List<Position> getOneBlock() {
         return oneBlock;
     }
