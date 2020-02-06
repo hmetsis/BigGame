@@ -106,7 +106,7 @@ public class Player {
 //                for (int j = 0; j < block.getOneBlock().size(); j++) {
 //                    if (playerPosition[i] == block.getOneBlock().get(j)) {
                         hitBlock = true;
-                        break outer;
+                        break;// outer;
                     }
                 }
             }
