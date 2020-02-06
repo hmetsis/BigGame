@@ -17,8 +17,6 @@ public class Player {
             Position position = new Position(x++, y);
             playerPosition[i] = position;
         }
-
-
     }
 
     public void playerMove(KeyType type) {
@@ -49,7 +47,6 @@ public class Player {
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
         for (int i = 0; i < playerGraphic.length ; i++) {
 
-
         boolean crashIntoWall = false;
 
         for (Position p : walls.getWall()) {
@@ -79,7 +76,8 @@ public class Player {
             printPlayer(terminal);
         }
     }
-    }//List<List<Position>> allBlocks,
+    }
+
     public void hitBlock(Terminal terminal) throws Exception {
         for (int i = 0; i < playerGraphic.length ; i++) {
             boolean hitBlock = false;
@@ -91,7 +89,6 @@ public class Player {
                     }
                 }
             }
-
         if (hitBlock) {
             Main.gameOver();
             System.out.println("Game over");
@@ -100,6 +97,17 @@ public class Player {
         }
     }
     }
+
+    public boolean hitTreat(Treats treat) throws Exception {
+        boolean isHitting = false;
+
+        for (int i = 0; i < playerGraphic.length ; i++) {
+            if (playerPosition[i].getX() == treat.position.getX() && playerPosition[i].getY() == treat.position.getY()) {
+                isHitting = true; }
+        }
+        return isHitting;
+    }
+
     public void printPlayer(Terminal terminal) throws IOException {
         for (int i = 0; i < playerGraphic.length ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
@@ -112,8 +120,10 @@ public class Player {
         terminal.setForegroundColor(TextColor.ANSI.BLUE);
             if(i % 3 == 0){
       terminal.putCharacter(playerChar);}
-            else{
+            else {
                 terminal.putCharacter('_');
                 terminal.setForegroundColor(TextColor.ANSI.CYAN);
-    }}}
+            }
+        }
+    }
 }
