@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Player {
     protected Position [] playerPosition = new Position[4];
-    final char playerChar = 'X';
+    final char playerChar = '█';
     int [] playerGraphic = new int[4];
 
     public Player (int x, int y) {
@@ -92,6 +92,9 @@ public class Player {
                 }
             }
         if (hitBlock) {
+            MusicStuff musicObject3 = new MusicStuff();
+            String filepath3 = "src/BlockInHead";
+            musicObject3.playMusic(filepath3);
             Main.gameOver();
             System.out.println("Game over");
         } else {
@@ -113,7 +116,7 @@ public class Player {
     public void printPlayer(Terminal terminal) throws IOException {
         for (int i = 0; i < playerGraphic.length ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
-            terminal.setBackgroundColor((new TextColor.RGB(122,199,220)));
+            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
             terminal.putCharacter(' ');
         }
 
@@ -123,8 +126,8 @@ public class Player {
             if(i % 3 == 0){
       terminal.putCharacter(playerChar);}
             else {
-                terminal.putCharacter('_');
-                terminal.setForegroundColor((new TextColor.RGB(122,199,220)));
+                terminal.putCharacter('█');
+                terminal.setForegroundColor(TextColor.ANSI.CYAN);
             }
         }
     }

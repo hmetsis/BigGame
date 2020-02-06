@@ -32,10 +32,14 @@ public class Main {
 
         String filepath = "src/Apple_Bite.wav";
         String filepath2 = "src/BackMusic.wav";
+        String filepath3 = "src/BlockInHead.wav";
 
         MusicStuff musicObject = new MusicStuff();
         MusicStuff musicObject2 = new MusicStuff();
+
+
         musicObject2.playBackgroundMusic(filepath2);
+
 
 
         terminal.setCursorVisible(false);
