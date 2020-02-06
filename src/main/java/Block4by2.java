@@ -11,7 +11,7 @@ public class Block4by2 extends Block{
     protected final char blockChar = '\u25A1';
 
     public Block4by2() {
-        int x = ThreadLocalRandom.current().nextInt(11, 55);
+        int x = ThreadLocalRandom.current().nextInt(6, 60);
         int backToX = x;
         int y = 0;
 
