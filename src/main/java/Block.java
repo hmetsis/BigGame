@@ -14,15 +14,6 @@ public class  Block {
     protected final char blockChar = '\u2588';
 
     public Block () {
-        int x = ThreadLocalRandom.current().nextInt(11, 59);
-        int y = 0;
-        int blockLength = ThreadLocalRandom.current().nextInt(2, 3);
-
-        for (int i = 0; i < blockLength; i++) {
-            position = new Position(x, y-blockLength);
-            oneBlock.add(position);
-            y++;
-        }
     }
 
     public void moveBlock (Terminal terminal) throws Exception {
@@ -36,6 +27,8 @@ public class  Block {
     public List<Position> getOneBlock() {
         return oneBlock;
     }
+
+
 
     public static void blockCreator() {
         Block block = null;

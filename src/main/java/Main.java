@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
+
+
+
     static DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
     static Terminal terminal;
     public static boolean continueReadingInput = true;
@@ -27,6 +30,20 @@ public class Main {
     }
 
     public static void main (String [] args) throws Exception {
+
+        String filepath = "src/Apple_Bite.wav";
+        String filepath2 = "src/BackMusic.wav";
+        String filepath3 = "src/BlockInHead";
+        String filepath4 = "src/nsmb_game_over.wav";
+
+        MusicStuff eatAppleObject = new MusicStuff();
+        MusicStuff otherSoundsObject = new MusicStuff();
+
+        otherSoundsObject.playBackgroundMusic(filepath2);
+
+
+
+
         terminal.setCursorVisible(false);
         paintBackground();
 
@@ -40,7 +57,7 @@ public class Main {
         Player player = new Player(20, 20);
         player.printPlayer(terminal);
 
-        terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+        terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
 
         KeyType type;
         KeyStroke keyStroke;
@@ -48,7 +65,7 @@ public class Main {
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
-            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+//            terminal.setBackgroundColor(new TextColor.RGB(122,199,220);
             Thread.sleep(50);
             keyStroke = null;
 
@@ -61,6 +78,11 @@ public class Main {
 
             player.checkIfWall(walls, terminal);
             player.hitBlock(terminal);
+            if(player.hitBlock==true){
+                otherSoundsObject.stopBackgroundMusic(filepath2);
+                otherSoundsObject.playMusic(filepath3);
+                otherSoundsObject.playGameOver(filepath4);
+            }
 
             if(allTreats.get(0).treatPosition.getY() == 21) {
                 terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
@@ -74,6 +96,7 @@ public class Main {
                 }
                 allTreats.remove(0);
                 score++;
+                eatAppleObject.playMusic(filepath);
             }
 
             if (moveBlockSpeed % 30 == 0) {
@@ -119,7 +142,7 @@ public class Main {
         for(int i = 11; i < 60; i++) {
             for (int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
                 terminal.putCharacter(' ');
             }
         }
@@ -137,8 +160,8 @@ public class Main {
     public static void printScore() throws Exception {
         String printScore = "Score: " + score;
         terminal.setCursorPosition(63, 10);
-        terminal.setBackgroundColor(TextColor.ANSI.RED);
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
+        terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
         for(int i = 0; i < printScore.length(); i++) {
             terminal.putCharacter(printScore.charAt(i));
@@ -148,8 +171,8 @@ public class Main {
     public static void printLives() throws Exception {
         String printLives = "Lives: ";
         terminal.setCursorPosition(63, 12);
-        terminal.setBackgroundColor(TextColor.ANSI.RED);
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
+        terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
         for(int i = 0; i < printLives.length(); i++) {
             terminal.putCharacter(printLives.charAt(i));
