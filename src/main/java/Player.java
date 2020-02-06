@@ -16,11 +16,11 @@ public class Player {
     boolean hitBlock;
 
     public Player (int x, int y) {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             Position position = new Position(x++, y);
             playerPosition[i] = position;
-        } int k = 1;
-        for (int i = 8; i < 14; i++) {
+        } int k = 0;
+        for (int i = 7; i < 14; i++) {
             Position position = new Position(playerPosition[k].getX(), y);
             playerPosition[i] = position;
             k++;
@@ -59,7 +59,7 @@ public class Player {
     }
 
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
-        for (int i = 0; i < 8 ; i++) {
+        for (int i = 0; i < 7 ; i++) {
 
         boolean crashIntoWall = false;
 
@@ -93,10 +93,10 @@ public class Player {
 
     public void hitBlock(Terminal terminal) throws Exception {
         hitBlock = false;
-        for (int i = 0; i < playerGraphic.length ; i++) {
+        for (int i = 0; i < 7 ; i++) {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
-                    if (p.getY() == playerPosition[i].getY() && p.getX() == playerPosition[i].getX()) {
+                    if ((p.getY() == 21 || p.getY() == 22) && p.getX() == playerPosition[i].getX()) {
 //                for (int j = 0; j < block.getOneBlock().size(); j++) {
 //                    if (playerPosition[i] == block.getOneBlock().get(j)) {
                         hitBlock = true;
@@ -120,8 +120,8 @@ public class Player {
         boolean isHitting = false;
 
 
-        for (int i = 0; i < playerGraphic.length ; i++) {
-                if (treat.treatPosition.getX() == playerPosition[i].getX() && treat.treatPosition.getY() == playerPosition[i].getY()) {
+        for (int i = 0; i < 7 ; i++) {
+                if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == 21 || treat.treatPosition.getY() == 22) ) {
                 isHitting = true;
                 break;}
         }
@@ -131,26 +131,26 @@ public class Player {
     public void printPlayer(Terminal terminal) throws IOException {
 
 
-        for (int i = 0; i < 8 ; i++) {
+        for (int i = 0; i < 7 ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
             terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
             terminal.putCharacter(' ');
         }
 
-        for (int i = 0; i < 8 ; i++) {
+        for (int i = 0; i < 7 ; i++) {
             playerPosition[i].setY(21);
             terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
             terminal.setForegroundColor(TextColor.ANSI.BLUE);
             terminal.putCharacter(playerGraphic[i].charAt(0));
         }
 
-        for (int i = 8; i < 14 ; i++) {
+        for (int i = 7; i < 14 ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
             terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
             terminal.putCharacter(' ');
         }
 
-            for (int q = 8; q < 14 ; q++) {
+            for (int q = 7; q < 14 ; q++) {
                 playerPosition[q].setY(22);
                 terminal.setCursorPosition(playerPosition[q].getX(), playerPosition[q].getY());
                 terminal.setForegroundColor(TextColor.ANSI.BLUE);
