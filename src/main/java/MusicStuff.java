@@ -8,24 +8,39 @@ import java.util.Arrays;
 
 public class MusicStuff {
 
-
+    Clip clip;
+    File musicPath;
+    AudioInputStream audioInput;
 
     void playBackgroundMusic (String musicLocation){
-
         try
         {
-            File musicPath = new File(musicLocation);
-
+            musicPath = new File(musicLocation);
             if(musicPath.exists())
             {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream((musicPath));
-                Clip clip = AudioSystem.getClip();
+                audioInput = AudioSystem.getAudioInputStream((musicPath));
+                clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
                 clip.loop((Clip.LOOP_CONTINUOUSLY));
-
-
+     }
+            else
+            {
+                System.out.println("cant find background music");
             }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    void stopBackgroundMusic (String musicLocation){
+
+        try
+        {
+            if(musicPath.exists())
+            {
+                clip.stop(); }
             else
             {
                 System.out.println("cant find file");
@@ -35,7 +50,6 @@ public class MusicStuff {
             e.printStackTrace();
         }
     }
-
 
     void playMusic (String musicLocation){
 
@@ -49,9 +63,6 @@ public class MusicStuff {
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-                //clip.loop((Clip.LOOP_CONTINUOUSLY));
-
-
             }
             else
             {
@@ -63,4 +74,26 @@ public class MusicStuff {
         }
     }
 
+    void playGameOver (String musicLocation){
+
+        try
+        {
+            File musicPath = new File(musicLocation);
+
+            if(musicPath.exists())
+            {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream((musicPath));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }
+            else
+            {
+                System.out.println("cant find file");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
