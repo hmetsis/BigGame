@@ -79,11 +79,13 @@ public class Player {
     }
 
     public void hitBlock(Terminal terminal) throws Exception {
+        boolean hitBlock = false;
         for (int i = 0; i < playerGraphic.length ; i++) {
-            boolean hitBlock = false;
             for (Block block : Main.allBlocks) {
-                for (int j = 0; j < block.getOneBlock().size(); j++) {
-                    if (block.position.getX() == playerPosition[i].getX() && block.position.getY() == playerPosition[i].getY()) {
+                for (Position p : block.getOneBlock()) {
+                    if (p.getY() == playerPosition[i].getY() && p.getX() == playerPosition[i].getX()) {
+//                for (int j = 0; j < block.getOneBlock().size(); j++) {
+//                    if (playerPosition[i] == block.getOneBlock().get(j)) {
                         hitBlock = true;
                         break;
                     }

@@ -132,8 +132,8 @@ public class Main {
     public static void printScore() throws Exception {
         String printScore = "Score: " + score;
         terminal.setCursorPosition(63, 10);
-        terminal.setBackgroundColor(TextColor.ANSI.RED);
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
+        terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
         for(int i = 0; i < printScore.length(); i++) {
             terminal.putCharacter(printScore.charAt(i));

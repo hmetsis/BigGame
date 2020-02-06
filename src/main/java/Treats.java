@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Treats extends Block {
 
     protected Position treatPosition;
-    protected final char treatChar = 'O';
+    protected final char treatChar = '\u25CF';
 
     public Treats() {
         do {
