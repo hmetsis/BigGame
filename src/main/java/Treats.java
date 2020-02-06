@@ -32,8 +32,8 @@ public class Treats extends Block {
             for (Position p : oneBlock.getOneBlock()) {
                 if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
                     crashing = true;
-                } else {
-                    crashing = false;
+                    System.out.println("Hej");
+                    break;
                 }
             }
         }
