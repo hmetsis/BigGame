@@ -55,7 +55,8 @@ public class Player {
 
                 break;
         }
-    }}
+    }
+    }
 
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
         for (int i = 0; i < 8 ; i++) {
@@ -69,20 +70,19 @@ public class Player {
                        playerPosition[j].setX(playerPosition[j].getOldX());
                        playerPosition[j].setY(playerPosition[j].getOldY());
                        crashIntoWall = true;
-                     }
+                   }
                }
 
-           }
-           else{
+           } else{
                  if (p.getX() == playerPosition[0].getX()) {
                     for (int k = 0; k < playerGraphic.length ; k++) {
                         playerPosition[k].setX(playerPosition[k].getOldX());
                         playerPosition[k].setY(playerPosition[k].getOldY());
                         crashIntoWall = true;
+                    }
                  }
-                     }
            }
-            }
+        }
         if (crashIntoWall) {
         }
         else {

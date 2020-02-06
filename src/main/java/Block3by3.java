@@ -19,7 +19,8 @@ public class Block3by3 extends Block{
             for (int j = 0; j < 3; j++) {
                 Position position = new Position(x, y);
                 oneBlock.add(position);
-                x++;}
+                x++;
+            }
             x = backToX;
             y++;
         }

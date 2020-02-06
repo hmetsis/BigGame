@@ -41,9 +41,6 @@ public class Main {
 
         otherSoundsObject.playBackgroundMusic(filepath2);
 
-
-
-
         terminal.setCursorVisible(false);
         paintBackground();
 
@@ -78,20 +75,20 @@ public class Main {
 
             player.checkIfWall(walls, terminal);
             player.hitBlock(terminal);
-            if(player.hitBlock==true){
+            if (player.hitBlock) {
                 otherSoundsObject.stopBackgroundMusic(filepath2);
                 otherSoundsObject.playMusic(filepath3);
                 otherSoundsObject.playGameOver(filepath4);
             }
 
-            if(allTreats.get(0).treatPosition.getY() == 21) {
+            if (allTreats.get(0).treatPosition.getY() == 21) {
                 terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
                 terminal.putCharacter(' ');
                 allTreats.remove(0);
             }
 
-            if(player.hitTreat(allTreats.get(0))) {
-                if(allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3){
+            if (player.hitTreat(allTreats.get(0))) {
+                if (allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3) {
                     Main.lives++;
                 }
                 allTreats.remove(0);
@@ -110,7 +107,7 @@ public class Main {
             }
 
 
-            if (moveBlockSpeed%150 == 0) {
+            if (moveBlockSpeed % 150 == 0) {
                 blockCreator();
 
                 Treats treat = new Treats();
