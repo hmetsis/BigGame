@@ -132,21 +132,21 @@ public class Main {
 
     public static void paintBackground () throws IOException {
         terminal.clearScreen();
-        for(int i = 0; i < 10; i++) {
-            for (int j = 0; j < 60; j++) {
+        for(int i = 0; i < 5; i++) {
+            for (int j = 0; j < 65; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(TextColor.ANSI.RED);
                 terminal.putCharacter('\u25A1');
             }
         }
-        for(int i = 11; i < 60; i++) {
+        for(int i = 6; i < 65; i++) {
             for (int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
                 terminal.putCharacter(' ');
             }
         }
-        for(int i = 60; i < 80; i++) {
+        for(int i = 65; i < 80; i++) {
             for(int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
                 terminal.setBackgroundColor(TextColor.ANSI.RED);
@@ -159,7 +159,7 @@ public class Main {
 
     public static void printScore() throws Exception {
         String printScore = "Score: " + score;
-        terminal.setCursorPosition(63, 10);
+        terminal.setCursorPosition(68, 12);
         terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
         terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
@@ -170,7 +170,7 @@ public class Main {
 
     public static void printLives() throws Exception {
         String printLives = "Lives: ";
-        terminal.setCursorPosition(63, 12);
+        terminal.setCursorPosition(68, 14);
         terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
         terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
