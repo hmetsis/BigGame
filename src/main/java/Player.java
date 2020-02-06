@@ -113,7 +113,7 @@ public class Player {
     public void printPlayer(Terminal terminal) throws IOException {
         for (int i = 0; i < playerGraphic.length ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
-            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+            terminal.setBackgroundColor((new TextColor.RGB(122,199,220)));
             terminal.putCharacter(' ');
         }
 
@@ -124,7 +124,7 @@ public class Player {
       terminal.putCharacter(playerChar);}
             else {
                 terminal.putCharacter('_');
-                terminal.setForegroundColor(TextColor.ANSI.CYAN);
+                terminal.setForegroundColor((new TextColor.RGB(122,199,220)));
             }
         }
     }

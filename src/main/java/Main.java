@@ -51,7 +51,7 @@ public class Main {
         Player player = new Player(20, 20);
         player.printPlayer(terminal);
 
-        terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+        terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
 
         KeyType type;
         KeyStroke keyStroke;
@@ -59,7 +59,7 @@ public class Main {
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
-            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+//            terminal.setBackgroundColor(new TextColor.RGB(122,199,220);
             Thread.sleep(50);
             keyStroke = null;
 
@@ -128,7 +128,7 @@ public class Main {
         for(int i = 11; i < 60; i++) {
             for (int j = 0; j < 60; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
                 terminal.putCharacter(' ');
             }
         }
@@ -157,8 +157,8 @@ public class Main {
     public static void printLives() throws Exception {
         String printLives = "Lives: ";
         terminal.setCursorPosition(63, 12);
-        terminal.setBackgroundColor(TextColor.ANSI.RED);
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
+        terminal.setForegroundColor(TextColor.ANSI.BLACK);
 
         for(int i = 0; i < printLives.length(); i++) {
             terminal.putCharacter(printLives.charAt(i));
