@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class Player {
-    protected Position [] playerPosition = new Position[4];
+    protected Position [] playerPosition = new Position[13];
     final char playerChar = '█';
-    int [] playerGraphic = new int[4];
+    int [] playerGraphic = new int[13];
+    boolean hitBlock;
 
     public Player (int x, int y) {
         for (int i = 0; i < playerGraphic.length; i++) {
@@ -51,7 +52,7 @@ public class Player {
 
         for (Position p : walls.getWall()) {
            if(playerPosition[0].getX()>30){
-               if (p.getX() == playerPosition[0].getX()+3) {
+               if (p.getX() == playerPosition[0].getX()+12) {
                    for (int j = 0; j < playerGraphic.length ; j++) {
                        playerPosition[j].setX(playerPosition[j].getOldX());
                        playerPosition[j].setY(playerPosition[j].getOldY());
@@ -79,7 +80,7 @@ public class Player {
     }
 
     public void hitBlock(Terminal terminal) throws Exception {
-        boolean hitBlock = false;
+        hitBlock = false;
         for (int i = 0; i < playerGraphic.length ; i++) {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
@@ -114,11 +115,19 @@ public class Player {
     }
 
     public void printPlayer(Terminal terminal) throws IOException {
-        for (int i = 0; i < playerGraphic.length ; i++) {
+        for (int l = 0; l < 5 ; l++) {
+
+
+      /*  for (int i = 0; i < playerGraphic.length ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
-            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+            terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
             terminal.putCharacter(' ');
+        }*/
         }
+
+        for (int w = 0; w < 5 ; w++) {
+            terminal.setCursorPosition(playerPosition[w].getX(), playerPosition[w].getY());
+            playerPosition[w].setY(w+1);
 
         for (int i = 0; i < playerGraphic.length ; i++) {
         terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
@@ -131,4 +140,5 @@ public class Player {
             }
         }
     }
+}
 }
