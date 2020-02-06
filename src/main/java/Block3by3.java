@@ -40,7 +40,7 @@ public class Block3by3 extends Block{
         for (Position b : oneBlock) {
             if (i < 3) {
                 terminal.setCursorPosition(b.getX(), b.getOldY());
-                terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
                 terminal.setForegroundColor(TextColor.ANSI.WHITE);
                 terminal.putCharacter(' ');
             }
