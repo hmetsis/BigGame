@@ -110,7 +110,7 @@ public class Main {
             }
 
 
-            if (moveBlockSpeed%70 == 0) {
+            if (moveBlockSpeed%150 == 0) {
                 blockCreator();
 
                 Treats treat = new Treats();
@@ -211,41 +211,43 @@ public class Main {
     }
 
     public static void printGameOver (Terminal terminal) throws Exception {
+        terminal.setForegroundColor(new TextColor.RGB(255,255,255));
         String gameOver1 = "  ____    _    __  __ _____    _____     _______ ____  ";
         String gameOver2 = " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ";
         String gameOver3 = "| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |";
         String gameOver4 = "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ";
         String gameOver5 = " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\";
 
-        int gameOverX = 11;
+        String [][] GameOver = new String[22][58];
+        int gameOverX = 6;
         int gameOverY = 6;
         for (char c : gameOver1.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 7;
         for (char c : gameOver2.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 8;
         for (char c : gameOver3.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 9;
         for (char c : gameOver4.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
             terminal.putCharacter(c);
             gameOverX++;
         }
-        gameOverX = 11;
+        gameOverX = 6;
         gameOverY = 10;
         for (char c : gameOver5.toCharArray()) {
             terminal.setCursorPosition(gameOverX, gameOverY);
