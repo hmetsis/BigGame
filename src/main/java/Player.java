@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class Player {
-    protected Position [] playerPosition = new Position[13];
+
     final char playerChar = '█';
-    int [] playerGraphic = new int[13];
+    String [] playerGraphic = new String[]{"█"," " ," " , " " ," " ,"█", "█", "█", "█"," " ," " , "█","█","█"," "};
+    protected Position [] playerPosition = new Position[playerGraphic.length];
     boolean hitBlock;
 
     public Player (int x, int y) {
@@ -117,30 +118,29 @@ public class Player {
     }
 
     public void printPlayer(Terminal terminal) throws IOException {
-        for (int l = 0; l < 5 ; l++) {
 
 
-      /*  for (int i = 0; i < playerGraphic.length ; i++) {
+        for (int i = 0; i < playerGraphic.length ; i++) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
             terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
             terminal.putCharacter(' ');
-        }*/
         }
 
-        for (int w = 0; w < 5 ; w++) {
-            terminal.setCursorPosition(playerPosition[w].getX(), playerPosition[w].getY());
-            playerPosition[w].setY(w+1);
 
-        for (int i = 0; i < playerGraphic.length ; i++) {
+
+        for (int i = 0; i < 3 ; i++) {
         terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
         terminal.setForegroundColor(TextColor.ANSI.BLUE);
-            if(i % 3 == 0){
+        playerPosition[i].setY(18+i);
+
+
+        if(i % 3 == 0){
       terminal.putCharacter(playerChar);}
             else {
                 terminal.putCharacter('█');
                 terminal.setForegroundColor(TextColor.ANSI.CYAN);
             }
-        }
+
     }
 }
 }
