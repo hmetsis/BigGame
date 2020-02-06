@@ -33,9 +33,9 @@ public class Main {
 
         for(int i = 0; i < 3; i++) {
             if(i%2 == 0) {
-                block = new StandingBlock();
+                block = new Block4by2();
             } else {
-                block = new LyingBlock();
+                block = new Block3by3();
             }
             allBlocks.add(block);
         }
