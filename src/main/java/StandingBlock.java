@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -6,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
         public StandingBlock () {
             int x = ThreadLocalRandom.current().nextInt(11, 59);
             int y = 0;
-            int blockLength = ThreadLocalRandom.current().nextInt(2, 3);
+            int blockLength = ThreadLocalRandom.current().nextInt(2, 5);
 
             for (int i = 0; i < blockLength; i++) {
                 Position position = new Position(x, y-blockLength);
@@ -17,16 +18,17 @@ import java.util.concurrent.ThreadLocalRandom;
 
         @Override
         public void moveBlock(Terminal terminal) throws Exception {
-            int y = oneBlock.get(oneBlock.size()-1).getY();
-            int x = oneBlock.get(oneBlock.size()-1).getX();
 
-            oneBlock.add(new Position(x, y+1));
-            terminal.setCursorPosition(x, y+1);
-            terminal.putCharacter(blockChar);
+            for(Position b : oneBlock) {
+                b.setOldY(b.getY());
+                b.setY(b.getY()+1);
+                terminal.setCursorPosition(b.getX(), b.getY());
+                terminal.setForegroundColor(TextColor.ANSI.GREEN);
+                terminal.putCharacter(blockChar);
 
-            terminal.setCursorPosition(oneBlock.get(0).getX(), oneBlock.get(0).getY());
-            terminal.putCharacter(' ');
-            oneBlock.remove(0);
+                terminal.setCursorPosition(b.getX(), b.getOldY());
+                terminal.putCharacter(' ');
+            }
         }
 
         @Override
