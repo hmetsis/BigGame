@@ -43,7 +43,7 @@ public class Block8by2 extends Block{
         for (Position b : oneBlock) {
             if (i < 8) {
                 terminal.setCursorPosition(b.getX(), b.getOldY());
-                terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
                 terminal.setForegroundColor(TextColor.ANSI.WHITE);
                 terminal.putCharacter(' ');
             }
