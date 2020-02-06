@@ -33,7 +33,7 @@ public class Main {
 
         for(int i = 0; i < 3; i++) {
             if(i%2 == 0) {
-                block = new Block2by4();
+                block = new Block4by2();
             } else {
                 block = new Block3by3();
             }

@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Block2by4 extends Block{
+public class Block8by2 extends Block{
     protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
     protected final char blockChar = '\u25A1';
 
-    public Block2by4 () {
-        int x = ThreadLocalRandom.current().nextInt(11, 55);
+    public Block8by2 () {
+        int x = ThreadLocalRandom.current().nextInt(11, 51);
         int backToX = x;
         int y = 0;
 
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 8; j++) {
                 Position position = new Position(x, y);
                 oneBlock.add(position);
                 x++;}
@@ -58,4 +58,3 @@ public class Block2by4 extends Block{
         return oneBlock;
     }
 }
-
