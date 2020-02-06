@@ -50,6 +50,8 @@ public class Treats extends Block {
             terminal.setCursorPosition(treatPosition.getX(), treatPosition.getOldY());
             terminal.putCharacter(' ');
         }
+
+
     }
 
 

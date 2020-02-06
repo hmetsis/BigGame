@@ -98,6 +98,7 @@ public class Main {
 //            terminal.setCursorPosition(oldX, oldY);
 //            terminal.putCharacter(' ');
             printScore();
+            printLives();
             terminal.flush();
         }
     }
@@ -139,6 +140,24 @@ public class Main {
             terminal.putCharacter(printScore.charAt(i));
         }
     }
+
+    public static void printLives() throws Exception {
+        String printLives = "Lives: ";
+        terminal.setCursorPosition(63, 12);
+        terminal.setBackgroundColor(TextColor.ANSI.RED);
+        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+
+        for(int i = 0; i < printLives.length(); i++) {
+            terminal.putCharacter(printLives.charAt(i));
+        }
+
+        for(int i = 0; i < 3; i++) {
+            terminal.putCharacter('\u2665');
+            terminal.putCharacter(' ');
+        }
+
+    }
+
     public static void blockCreator() {
         Block block = null;
             for(int i = 0; i < 2; i++) {
