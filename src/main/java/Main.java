@@ -47,10 +47,12 @@ public class Main {
         terminal.setCursorVisible(false);
         paintBackground();
 
-        blockCreator();
-
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
+
+        blockCreator();
+
+
 
         Wall walls = new Wall();
         walls.printWall(terminal);
@@ -100,21 +102,21 @@ public class Main {
             }
 
             if (moveBlockSpeed % 30 == 0) {
-                for (int i = 0; i < allBlocks.size(); i++) {
-                    allBlocks.get(i).moveBlock(terminal);
-                }
-
                 for (int i = 0; i < allTreats.size(); i++) {
                     allTreats.get(i).moveTreat(terminal);
+                }
+
+                for (int i = 0; i < allBlocks.size(); i++) {
+                    allBlocks.get(i).moveBlock(terminal);
                 }
             }
 
 
             if (moveBlockSpeed%70 == 0) {
-                blockCreator();
-
                 Treats treat = new Treats();
                 allTreats.add(treat);
+
+                blockCreator();
             }
 
             moveBlockSpeed++;
