@@ -81,7 +81,7 @@ public class Main {
                 otherSoundsObject.playGameOver(filepath4);
             }
 
-            if (allTreats.get(0).treatPosition.getY() == 21) {
+            if (allTreats.get(0).treatPosition.getY() == 24) {
                 terminal.setCursorPosition(allTreats.get(0).treatPosition.getX(), allTreats.get(0).treatPosition.getY());
                 terminal.putCharacter(' ');
                 allTreats.remove(0);
