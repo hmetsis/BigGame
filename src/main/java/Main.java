@@ -16,6 +16,7 @@ public class Main {
     public static List<Block> allBlocks = new ArrayList<>();
     public static List<Treats> allTreats = new ArrayList<>();
     static int score = 0;
+    public static int lives = 1;
 
     static {
         try {
@@ -68,6 +69,9 @@ public class Main {
             }
 
             if(player.hitTreat(allTreats.get(0))) {
+                if(allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3){
+                    Main.lives++;
+                }
                 allTreats.remove(0);
                 score++;
             }
@@ -151,7 +155,7 @@ public class Main {
             terminal.putCharacter(printLives.charAt(i));
         }
 
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < lives; i++) {
             terminal.putCharacter('\u2665');
             terminal.putCharacter(' ');
         }
