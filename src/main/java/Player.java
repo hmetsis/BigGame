@@ -11,7 +11,6 @@ public class Player {
     protected Position [] playerPosition = new Position[4];
     final char playerChar = 'X';
     int [] playerGraphic = new int[4];
-    private int points = 0;
 
     public Player (int x, int y) {
         for (int i = 0; i < playerGraphic.length; i++) {
@@ -99,15 +98,14 @@ public class Player {
     }
     }
 
-    public void hitTreat(Terminal terminal, Treats treat) throws Exception {
-        for (int i = 0; i < playerGraphic.length ; i++) {
-            if (playerPosition[i].getX() == treat.position.getX() && playerPosition[i].getY() == treat.position.getY());
-            points++;
-        }
-    }
+    public boolean hitTreat(Treats treat) throws Exception {
+        boolean isHitting = false;
 
-    public int getPoints() {
-        return points;
+        for (int i = 0; i < playerGraphic.length ; i++) {
+            if (playerPosition[i].getX() == treat.position.getX() && playerPosition[i].getY() == treat.position.getY()) {
+                isHitting = true; }
+        }
+        return isHitting;
     }
 
     public void printPlayer(Terminal terminal) throws IOException {

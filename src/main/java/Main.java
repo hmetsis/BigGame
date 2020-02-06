@@ -14,6 +14,8 @@ public class Main {
     static Terminal terminal;
     public static boolean continueReadingInput = true;
     public static List<Block> allBlocks = new ArrayList<>();
+    public static List<Treats> allTreats = new ArrayList<>();
+    static int score = 0;
 
     static {
         try {
@@ -38,6 +40,9 @@ public class Main {
             allBlocks.add(block);
         }
 
+        Treats firstTreat = new Treats();
+        allTreats.add(firstTreat);
+
         Wall walls = new Wall();
         walls.printWall(terminal);
         Player player = new Player(20, 20);
@@ -51,14 +56,18 @@ public class Main {
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
+            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
             Thread.sleep(50);
 
             if (moveBlockSpeed % 30 == 0) {
                 for (int i = 0; i < allBlocks.size(); i++) {
                     allBlocks.get(i).moveBlock(terminal);
                 }
-            }
 
+                for (int i = 0; i < allTreats.size(); i++) {
+                    allTreats.get(i).moveTreat(terminal);
+                }
+            }
 
             moveBlockSpeed++;
             keyStroke = terminal.pollInput();
@@ -80,12 +89,20 @@ public class Main {
                     Block tempBlock = new LyingBlock();
                     allBlocks.add(tempBlock);
                 }
+
+                Treats treat = new Treats();
+                allTreats.add(treat);
+            }
+
+            if(player.hitTreat(allTreats.get(0))) {
+                score++;
             }
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
 //            terminal.putCharacter(player);
 //            terminal.setCursorPosition(oldX, oldY);
 //            terminal.putCharacter(' ');
+            printScore();
             terminal.flush();
         }
     }
@@ -115,6 +132,17 @@ public class Main {
             terminal.flush();
         }
 
+    }
+
+    public static void printScore() throws Exception {
+        String printScore = "Score: " + score;
+        terminal.setCursorPosition(63, 10);
+        terminal.setBackgroundColor(TextColor.ANSI.RED);
+        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+
+        for(int i = 0; i < printScore.length(); i++) {
+            terminal.putCharacter(printScore.charAt(i));
+        }
     }
 
     public static void gameOver() throws Exception {

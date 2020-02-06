@@ -40,7 +40,7 @@ public class Treats extends Block {
 
             terminal.setCursorPosition(treatPosition.getX(), treatPosition.getY());
             terminal.setForegroundColor(TextColor.ANSI.GREEN);
-            terminal.putCharacter(blockChar);
+            terminal.putCharacter(treatChar);
 
             terminal.setCursorPosition(treatPosition.getX(), treatPosition.getOldY());
             terminal.putCharacter(' ');
