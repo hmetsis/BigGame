@@ -1,14 +1,13 @@
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
-
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Treats extends Block {
 
     protected Position treatPosition;
+    protected final char treatChar = '\u25cf';
+    protected final char livesChar = '\u2665';
     protected KindOfTreat kindOfTreat;
-    protected final char treatChar = '\u25CF';
 
     public Treats() {
         do {
@@ -23,38 +22,43 @@ public class Treats extends Block {
             } else {
                 kindOfTreat = KindOfTreat.POINT;
             }
-        } while (checkIfBlock()) ;
+        } while (checkIfBlock());
     }
 
     public boolean checkIfBlock() {
         boolean crashing = false;
 
-            for (Block oneBlock : Main.allBlocks) {
-                for (Position p : oneBlock.getOneBlock()) {
-                    if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
-                        crashing = true;
-                    } else {
-                        crashing = false;
-                    }
+        for (Block oneBlock : Main.allBlocks) {
+            for (Position p : oneBlock.getOneBlock()) {
+                if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
+                    crashing = true;
+                } else {
+                    crashing = false;
                 }
             }
-            return crashing;
         }
+        return crashing;
+    }
 
     public void moveTreat(Terminal terminal) throws Exception {
-            treatPosition.setOldY(treatPosition.getY());
-            treatPosition.setY(treatPosition.getY() + 1);
+        treatPosition.setOldY(treatPosition.getY());
+        treatPosition.setY(treatPosition.getY() + 1);
 
-            terminal.setCursorPosition(treatPosition.getX(), treatPosition.getY());
+        terminal.setCursorPosition(treatPosition.getX(), treatPosition.getY());
+
+        if (kindOfTreat.equals(KindOfTreat.EXTRA_LIVES)) {
+            terminal.setForegroundColor(TextColor.ANSI.RED);
+            terminal.putCharacter(livesChar);
+        } else {
             terminal.setForegroundColor(TextColor.ANSI.GREEN);
             terminal.putCharacter(treatChar);
-
-            terminal.setCursorPosition(treatPosition.getX(), treatPosition.getOldY());
-            terminal.putCharacter(' ');
         }
 
-
+        terminal.setCursorPosition(treatPosition.getX(), treatPosition.getOldY());
+        terminal.putCharacter(' ');
     }
+}
+
 
 
 enum KindOfTreat {
