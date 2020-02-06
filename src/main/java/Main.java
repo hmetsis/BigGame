@@ -51,13 +51,12 @@ public class Main {
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
-            Thread.sleep(10);
+            Thread.sleep(50);
 
-            if (moveBlockSpeed % 120 == 0) {
+            if (moveBlockSpeed % 30 == 0) {
                 for (int i = 0; i < allBlocks.size(); i++) {
                     allBlocks.get(i).moveBlock(terminal);
                 }
-                moveBlockSpeed = 0;
             }
 
             moveBlockSpeed++;
@@ -70,12 +69,15 @@ public class Main {
             player.playerMove(type);
             player.checkIfWall(walls, terminal);
             player.hitBlock(terminal);
-            if (moveBlockSpeed % 200 == 0) {
+
+            if (moveBlockSpeed%50 == 0) {
                 int blockTypeChooser = ThreadLocalRandom.current().nextInt(1, 3);
                 if (blockTypeChooser % 2 == 0) {
-                    allBlocks.add(new StandingBlock());
+                    Block tempBlock = new StandingBlock();
+                    allBlocks.add(tempBlock);
                 } else {
-                    allBlocks.add(new LyingBlock());
+                    Block tempBlock = new LyingBlock();
+                    allBlocks.add(tempBlock);
                 }
             }
             //Ligga sist i loopen
