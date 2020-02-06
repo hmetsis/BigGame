@@ -23,7 +23,7 @@ public class Main {
 
     public static int moveSpeed = 50;
     public static int oldMoveSpeed = 50;
-    static int createBlockSpeed = 210;
+    static int createBlockSpeed = 180;
     static int createTreat = 150;
     static boolean isNotIncreasingSpeed = false;
 
