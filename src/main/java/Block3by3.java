@@ -26,31 +26,38 @@ public class Block3by3 extends Block{
     }
 
     @Override
-    public void moveBlock (Terminal terminal) throws Exception{
-        for(Position b : oneBlock) {
+    public void moveBlock (Terminal terminal) throws Exception {
+        int i = 0;
+        for (Position b : oneBlock) {
             b.setOldY(b.getY());
-            b.setY(b.getY()+3);
+            b.setY(b.getY() + 1);
             terminal.setCursorPosition(b.getX(), b.getY());
             terminal.setBackgroundColor(TextColor.ANSI.RED);
             terminal.setForegroundColor(TextColor.ANSI.WHITE);
             terminal.putCharacter(blockChar);
-
-            terminal.setCursorPosition(b.getX(), b.getOldY());
-            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
-            terminal.setForegroundColor(TextColor.ANSI.WHITE);
-            terminal.putCharacter(' ');
         }
+
+        for (Position b : oneBlock) {
+            if (i < 3) {
+                terminal.setCursorPosition(b.getX(), b.getOldY());
+                terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+                terminal.setForegroundColor(TextColor.ANSI.WHITE);
+                terminal.putCharacter(' ');
+            }
+            i++;
+        }
+
     }
 
-    @Override
-    public void printBlock (Terminal terminal) throws Exception {
-        for (Position position : oneBlock) {
-            terminal.setCursorPosition(position.getX(), position.getY());
-            terminal.setBackgroundColor(TextColor.ANSI.RED);
-            terminal.setForegroundColor(TextColor.ANSI.WHITE);
-            terminal.putCharacter(blockChar);
-        }
-    }
+//    @Override
+//    public void printBlock (Terminal terminal) throws Exception {
+//        for (Position position : oneBlock) {
+//            terminal.setCursorPosition(position.getX(), position.getY());
+//            terminal.setBackgroundColor(TextColor.ANSI.RED);
+//            terminal.setForegroundColor(TextColor.ANSI.WHITE);
+//            terminal.putCharacter(blockChar);
+//        }
+//    }
 
 
 

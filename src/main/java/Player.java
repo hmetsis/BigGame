@@ -101,9 +101,11 @@ public class Player {
     public boolean hitTreat(Treats treat) throws Exception {
         boolean isHitting = false;
 
+
         for (int i = 0; i < playerGraphic.length ; i++) {
-                if (playerPosition[i].getX() == treat.treatPosition.getX() && playerPosition[i].getY() == treat.treatPosition.getY()) {
-                isHitting = true; }
+                if (treat.treatPosition.getX() == playerPosition[i].getX() && treat.treatPosition.getY() == playerPosition[i].getY()) {
+                isHitting = true;
+                break;}
         }
         return isHitting;
     }

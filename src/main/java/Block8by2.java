@@ -27,30 +27,39 @@ public class Block8by2 extends Block{
 
     @Override
     public void moveBlock (Terminal terminal) throws Exception{
+        int i = 0;
+
         for(Position b : oneBlock) {
             b.setOldY(b.getY());
-            b.setY(b.getY()+2);
+            b.setY(b.getY()+1);
             terminal.setCursorPosition(b.getX(), b.getY());
             terminal.setBackgroundColor(TextColor.ANSI.RED);
             terminal.setForegroundColor(TextColor.ANSI.WHITE);
             terminal.putCharacter(blockChar);
 
-            terminal.setCursorPosition(b.getX(), b.getOldY());
-            terminal.setBackgroundColor(TextColor.ANSI.CYAN);
-            terminal.setForegroundColor(TextColor.ANSI.WHITE);
-            terminal.putCharacter(' ');
+
+        }
+
+        for (Position b : oneBlock) {
+            if (i < 8) {
+                terminal.setCursorPosition(b.getX(), b.getOldY());
+                terminal.setBackgroundColor(TextColor.ANSI.CYAN);
+                terminal.setForegroundColor(TextColor.ANSI.WHITE);
+                terminal.putCharacter(' ');
+            }
+            i++;
         }
     }
 
-    @Override
-    public void printBlock (Terminal terminal) throws Exception {
-        for (Position position : oneBlock) {
-            terminal.setCursorPosition(position.getX(), position.getY());
-            terminal.setBackgroundColor(TextColor.ANSI.RED);
-            terminal.setForegroundColor(TextColor.ANSI.WHITE);
-            terminal.putCharacter('\u25A1');
-        }
-    }
+//    @Override
+//    public void printBlock (Terminal terminal) throws Exception {
+//        for (Position position : oneBlock) {
+//            terminal.setCursorPosition(position.getX(), position.getY());
+//            terminal.setBackgroundColor(TextColor.ANSI.RED);
+//            terminal.setForegroundColor(TextColor.ANSI.WHITE);
+//            terminal.putCharacter('\u25A1');
+//        }
+//    }
 
 
 
