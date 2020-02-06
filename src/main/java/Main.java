@@ -18,8 +18,14 @@ public class Main {
     public static boolean continueReadingInput = true;
     public static List<Block> allBlocks = new ArrayList<>();
     public static List<Treats> allTreats = new ArrayList<>();
-    static int score = 0;
-    public static int lives = 1;
+    static int score = 1;
+    public static int lives = 3;
+
+    public static int moveSpeed = 50;
+    public static int oldMoveSpeed = 50;
+    static int createBlockSpeed = 210;
+    static int createTreat = 150;
+    static boolean isNotIncreasingSpeed = false;
 
     static {
         try {
@@ -49,8 +55,6 @@ public class Main {
 
         blockCreator();
 
-
-
         Wall walls = new Wall();
         walls.printWall(terminal);
         Player player = new Player(20, 20);
@@ -58,14 +62,14 @@ public class Main {
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
 
-        KeyType type;
+        KeyType type = KeyType.ArrowUp;
         KeyStroke keyStroke;
         terminal.flush();
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
 //            terminal.setBackgroundColor(new TextColor.RGB(122,199,220);
-            Thread.sleep(50);
+            Thread.sleep(30);
             keyStroke = null;
 
             keyStroke = terminal.pollInput();
@@ -75,12 +79,19 @@ public class Main {
                 player.playerMove(type);
             }
 
+            if(!type.equals(KeyType.ArrowDown)){
+                moveSpeed = oldMoveSpeed;
+            }
+
             player.checkIfWall(walls, terminal);
-            player.hitBlock(terminal);
-            if (player.hitBlock) {
-                otherSoundsObject.stopBackgroundMusic(filepath2);
-                otherSoundsObject.playMusic(filepath3);
-                otherSoundsObject.playGameOver(filepath4);
+
+            if (!player.hitBlock) {
+                player.hitBlock(terminal);
+                if (player.hitBlock) {
+                    otherSoundsObject.stopBackgroundMusic(filepath2);
+                    otherSoundsObject.playMusic(filepath3);
+                    otherSoundsObject.playGameOver(filepath4);
+                }
             }
 
             if (allTreats.get(0).treatPosition.getY() == 24) {
@@ -98,7 +109,9 @@ public class Main {
                 eatAppleObject.playMusic(filepath);
             }
 
-            if (moveBlockSpeed % 30 == 0) {
+            //adjusted for shorter sleep
+            if ((moveBlockSpeed % moveSpeed) == 0) {
+                player.hitBlock = false;
                 for (int i = 0; i < allTreats.size(); i++) {
                     allTreats.get(i).moveTreat(terminal);
                 }
@@ -108,17 +121,39 @@ public class Main {
                 }
             }
 
-
-            if (moveBlockSpeed % 150 == 0) {
-                blockCreator();
-
-                Treats treat = new Treats();
-                allTreats.add(treat);
-
+            //change for speeding up the game
+            if ((moveBlockSpeed % createBlockSpeed) == 0) {
                 blockCreator();
             }
 
+            if ((moveBlockSpeed % createTreat) == 0) {
+                Treats treat = new Treats();
+                allTreats.add(treat);
+            }
+
+            if(moveBlockSpeed == 200000) {
+                moveBlockSpeed = 0;
+            }
+
             moveBlockSpeed++;
+           if(score % 5 == 0 && !isNotIncreasingSpeed) {
+                createTreat = createTreat-6;
+                createBlockSpeed = createBlockSpeed-9;
+                moveSpeed = moveSpeed-2;
+                oldMoveSpeed = oldMoveSpeed-2;
+                isNotIncreasingSpeed = true;
+            } else if (score%2 == 0) {
+                isNotIncreasingSpeed = false;
+            }
+
+            if (score%2 == 0 && score%5 == 0){
+                isNotIncreasingSpeed = true;
+            }
+
+            if(lives == 0) {
+                gameOver();
+                continueReadingInput = false;
+            }
 
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
@@ -159,7 +194,7 @@ public class Main {
     }
 
     public static void printScore() throws Exception {
-        String printScore = "Score: " + score;
+        String printScore = "Score: " + (score-1);
         terminal.setCursorPosition(68, 12);
         terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
         terminal.setForegroundColor(TextColor.ANSI.BLACK);
@@ -179,9 +214,13 @@ public class Main {
             terminal.putCharacter(printLives.charAt(i));
         }
 
+        for(int i = 0; i < 3; i++){
+            terminal.putCharacter(' ');
+        }
+        terminal.setCursorPosition(75, 14);
+
         for(int i = 0; i < lives; i++) {
             terminal.putCharacter('\u2665');
-            terminal.putCharacter(' ');
         }
 
     }

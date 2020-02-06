@@ -17,7 +17,7 @@ public class Player {
             " ", " ", "█", "█", "█", " ", " "
     };
     protected Position [] playerPosition = new Position[playerGraphic.length];
-    boolean hitBlock;
+    public boolean hitBlock = false;
 
     public Player (int x, int y) {
         for (int i = 0; i < 7; i++) {
@@ -46,9 +46,9 @@ public class Player {
             playerPosition[i].setOldY(playerPosition[i].getY());
 
             switch (type) {
-    //            case ArrowDown:
-    //                y++;
-    //                break;
+                case ArrowDown:
+                    Main.moveSpeed = 15;
+                    break;
                 case ArrowRight:
                     playerPosition[i].setX(playerPosition[i].getX()+1);
 
@@ -110,15 +110,17 @@ public class Player {
                     }
                 }
             }
-            if (hitBlock) {
-                MusicStuff musicObject3 = new MusicStuff();
-                String filepath3 = "src/BlockInHead";
-                musicObject3.playMusic(filepath3);
-                Main.gameOver();
-                System.out.println("Game over");
-            } else {
-                printPlayer(terminal);
-            }
+        }
+
+        if (hitBlock) {
+            MusicStuff musicObject3 = new MusicStuff();
+            String filepath3 = "src/BlockInHead";
+            musicObject3.playMusic(filepath3);
+            //Main.gameOver();
+            Main.lives = Main.lives-1;
+            System.out.println("Game over");
+        } else {
+            printPlayer(terminal);
         }
     }
 
