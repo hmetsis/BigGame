@@ -11,7 +11,11 @@ public class Player {
 
     final char playerChar = '█';
 
-    String [] playerGraphic = new String[]{"█"," " ," " , " " ," " ," ","█"," ","█"," ", "█"," ", "█"," " ," " ," ", "█","█","█"," ", " ",};
+    String [] playerGraphic = new String[]{
+            "█", " " ," ", " ", " ", " ", "█",
+            " ", "█", " ", "█", " ", "█", " ",
+            " ", " ", "█", "█", "█", " ", " "
+    };
     protected Position [] playerPosition = new Position[playerGraphic.length];
     boolean hitBlock;
 
