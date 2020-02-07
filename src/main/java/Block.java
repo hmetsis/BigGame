@@ -6,9 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class  Block {
 
-    protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
-    protected final char blockChar = '\u2588';
 
     public Block () {
     }

@@ -13,7 +13,7 @@ public class Player {
     };
     protected Position [] playerPosition = new Position[playerGraphic.length];
     public boolean hitBlock = false;
-    int playerWitdh = 5;
+    int playerWidth = 5;
     int extraSpeed = 10;
     int middle = 30;
     int playerHeight = 21;
@@ -23,7 +23,7 @@ public class Player {
 
     public Player (Position position) {
         int j = 0;
-        for (int i = 0; i < playerWitdh; i++) {
+        for (int i = 0; i < playerWidth; i++) {
             Position p = new Position(position.getX()+j, position.getY());
             playerPosition[i] = p;
             j++;
@@ -59,13 +59,13 @@ public class Player {
     }
 
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
-        for (int i = 0; i < playerWitdh ; i++) {
+        for (int i = 0; i < playerWidth; i++) {
 
             boolean crashIntoWall = false;
 
             for (Position p : walls.getWall()) {
                 if(playerPosition[0].getX()>middle){
-                    if (p.getX() == playerPosition[playerWitdh-1].getX()) {
+                    if (p.getX() == playerPosition[playerWidth -1].getX()) {
                         for (int j = 0; j < playerGraphic.length ; j++) {
                            playerPosition[j].setX(playerPosition[j].getOldX());
                            playerPosition[j].setY(playerPosition[j].getOldY());
@@ -93,7 +93,7 @@ public class Player {
         hitBlock = false;
         Block deleteBlock = null;
 
-        for (int i = 0; i < playerWitdh ; i++) {
+        for (int i = 0; i < playerWidth; i++) {
             for (Block block : TheGame.allBlocks) {
                 for (Position p : block.getOneBlock()) {
                     if ((p.getY() == playerHeight || p.getY() == playerHeight2) && p.getX() == playerPosition[i].getX()) {
@@ -123,10 +123,10 @@ public class Player {
         }
     }
 
-    public boolean hitTreat(Treats treat) throws Exception {
+    public boolean hitTreat(Treats treat)  {
         boolean isHitting = false;
 
-        for (int i = 0; i < playerWitdh ; i++) {
+        for (int i = 0; i < playerWidth; i++) {
             if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == playerHeight || treat.treatPosition.getY() == playerHeight2) ) {
             isHitting = true;
             break;

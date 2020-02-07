@@ -4,7 +4,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
-import java.util.Arrays;
 
 public class SoundClass {
 
@@ -34,7 +33,7 @@ public class SoundClass {
         }
     }
 
-    void stopLoopedMusic(String musicLocation){
+    void stopLoopedMusic(){
 
         try
         {

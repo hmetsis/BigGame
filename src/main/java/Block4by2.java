@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Block4by2 extends Block{
-    protected Position position;
     protected List<Position> oneBlock = new ArrayList<>();
     protected final char blockChar = '\u25A1';
 
@@ -26,7 +25,7 @@ public class Block4by2 extends Block{
     }
 
     @Override
-    public void moveBlock (Terminal terminal) throws Exception{
+    public void moveBlock (Terminal terminal) {
         for(Position b : oneBlock) {
             b.setOldY(b.getY());
             b.setY(b.getY()+1);

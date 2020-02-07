@@ -60,7 +60,7 @@ public class Painter {
         }
         terminal.flush();
         do {
-            Thread.sleep(5); // might throw InterruptedException
+            Thread.sleep(5);
             keyStroke = terminal.pollInput();
         } while (keyStroke == null);
 

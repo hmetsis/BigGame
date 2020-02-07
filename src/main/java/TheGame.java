@@ -77,7 +77,7 @@ public class TheGame {
         terminal.setCursorVisible(false);
         otherSoundsObject.playLoopedMusic(fileIntro);
         Painter.printStartScreen(terminal, keyStroke);
-        otherSoundsObject.stopLoopedMusic(fileIntro);
+        otherSoundsObject.stopLoopedMusic();
         otherSoundsObject.playLoopedMusic(fileBackMusic);
         Painter.paintBackground(terminal);
 
@@ -142,7 +142,7 @@ public class TheGame {
     public static void checkLives() throws Exception {
         if(lives == 0) {
             gameOver();
-            otherSoundsObject.stopLoopedMusic(fileBackMusic);
+            otherSoundsObject.stopLoopedMusic();
             otherSoundsObject.playMusic(fileBlockInHead);
             otherSoundsObject.playGameOver(fileGameOver);
             continueReadingInput = false;
