@@ -98,6 +98,8 @@ public class Player {
 
     public void hitBlock(Terminal terminal) throws Exception {
         hitBlock = false;
+        Block deleteBlock = null;
+
         for (int i = 0; i < 5 ; i++) {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
@@ -105,6 +107,7 @@ public class Player {
 //                for (int j = 0; j < block.getOneBlock().size(); j++) {
 //                    if (playerPosition[i] == block.getOneBlock().get(j)) {
                         hitBlock = true;
+                        deleteBlock = block;
                         break;
                     }
                 }
@@ -120,6 +123,14 @@ public class Player {
             //System.out.println("Game over");
         } else {
             printPlayer(terminal);
+        }
+
+        if (hitBlock) {
+            for (Position p : deleteBlock.getOneBlock()) {
+                terminal.setCursorPosition(p.getX(), p.getY());
+                terminal.putCharacter(' ');
+            }
+            Main.allBlocks.remove(deleteBlock);
         }
     }
 
