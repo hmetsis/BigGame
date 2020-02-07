@@ -6,13 +6,13 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 import java.util.Arrays;
 
-public class MusicStuff {
+public class SoundClass {
 
     Clip clip;
     File musicPath;
     AudioInputStream audioInput;
 
-    void playBackgroundMusic (String musicLocation){
+    void playLoopedMusic(String musicLocation){
         try
         {
             musicPath = new File(musicLocation);
@@ -26,7 +26,7 @@ public class MusicStuff {
      }
             else
             {
-                System.out.println("cant find background music");
+                System.out.println("cant find file");
             }
         }
         catch (Exception e){
@@ -34,7 +34,7 @@ public class MusicStuff {
         }
     }
 
-    void stopBackgroundMusic (String musicLocation){
+    void stopLoopedMusic(String musicLocation){
 
         try
         {

@@ -42,33 +42,39 @@ public class Main {
         String fileBlockInHead = "src/BlockInHead";
         String fileGameOver = "src/nsmb_game_over.wav";
         String fileWooho = "src/Wooho.wav.wav";
+        String fileIntro = "src/Intro.wav.wav";
 
-        MusicStuff eatAppleObject = new MusicStuff();
-        MusicStuff otherSoundsObject = new MusicStuff();
-        otherSoundsObject.playBackgroundMusic(fileBackMusic);
+        SoundClass eatAppleObject = new SoundClass();
+        SoundClass otherSoundsObject = new SoundClass();
 
         KeyType type = KeyType.ArrowUp;
         KeyStroke keyStroke = null;
 
         terminal.setCursorVisible(false);
+        otherSoundsObject.playLoopedMusic(fileIntro);
         Painter.printStartScreen(terminal, keyStroke);
+        otherSoundsObject.stopLoopedMusic(fileIntro);
+        otherSoundsObject.playLoopedMusic(fileBackMusic);
         Painter.paintBackground(terminal);
+
         Wall walls = new Wall();
         walls.printWall(terminal);
 
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
+
         blockCreator();
 
         Player player = new Player(20, 21);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-        terminal.flush();
 
+        terminal.flush();
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
+//            terminal.setBackgroundColor(new TextColor.RGB(122,199,220);
             Thread.sleep(30);
             keyStroke = null;
 
@@ -101,7 +107,7 @@ public class Main {
             if (player.hitTreat(allTreats.get(0))) {
                 if (allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3) {
                     Main.lives++;
-                    MusicStuff eatExtraLife = new MusicStuff();
+                    SoundClass eatExtraLife = new SoundClass();
                     eatExtraLife.playMusic(fileWooho);
                 }
                 allTreats.remove(0);
@@ -109,6 +115,7 @@ public class Main {
                 eatAppleObject.playMusic(fileAppleBite);
             }
 
+            //adjusted for shorter sleep
             if ((moveBlockSpeed % moveSpeed) == 0) {
                 player.hitBlock = false;
                 for (int i = 0; i < allTreats.size(); i++) {
@@ -120,6 +127,7 @@ public class Main {
                 }
             }
 
+            //change for speeding up the game
             if ((moveBlockSpeed % createBlockSpeed) == 0) {
                 blockCreator();
             }
@@ -155,7 +163,7 @@ public class Main {
 
             if(lives == 0) {
                 gameOver();
-                otherSoundsObject.stopBackgroundMusic(fileBackMusic);
+                otherSoundsObject.stopLoopedMusic(fileBackMusic);
                 otherSoundsObject.playMusic(fileBlockInHead);
                 otherSoundsObject.playGameOver(fileGameOver);
                 continueReadingInput = false;
@@ -165,49 +173,12 @@ public class Main {
                 allBlocks.remove(0);
             }
 
-            //Ligga sist i loopen
-//            terminal.setCursorPosition(x, y);
-//            terminal.putCharacter(player);
-//            terminal.setCursorPosition(oldX, oldY);
-//            terminal.putCharacter(' ');
-            printScore();
-            printLives();
+            Painter.printScore(terminal);
+            Painter.printLives(terminal);
             terminal.flush();
         }
     }
 
-
-    public static void printScore() throws Exception {
-        String printScore = "Score: " + (score-1);
-        terminal.setCursorPosition(68, 12);
-        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
-        terminal.setForegroundColor(TextColor.ANSI.BLACK);
-
-        for(int i = 0; i < printScore.length(); i++) {
-            terminal.putCharacter(printScore.charAt(i));
-        }
-    }
-
-    public static void printLives() throws Exception {
-        String printLives = "Lives: ";
-        terminal.setCursorPosition(68, 14);
-        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
-        terminal.setForegroundColor(TextColor.ANSI.BLACK);
-
-        for(int i = 0; i < printLives.length(); i++) {
-            terminal.putCharacter(printLives.charAt(i));
-        }
-
-        for(int i = 0; i < 3; i++){
-            terminal.putCharacter(' ');
-        }
-        terminal.setCursorPosition(75, 14);
-
-        for(int i = 0; i < lives; i++) {
-            terminal.putCharacter('\u2665');
-        }
-
-    }
 
     public static void blockCreator() {
         Block block = null;
@@ -231,54 +202,8 @@ public class Main {
 
     public static void gameOver() throws Exception {
         continueReadingInput = false;
-        printGameOver(terminal);
+        Painter.printGameOver(terminal);
     }
 
-    public static void printGameOver (Terminal terminal) throws Exception {
-        terminal.setForegroundColor(new TextColor.RGB(255,255,255));
-        String gameOver1 = "  ____    _    __  __ _____    _____     _______ ____  ";
-        String gameOver2 = " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ";
-        String gameOver3 = "| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |";
-        String gameOver4 = "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ";
-        String gameOver5 = " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\";
-
-        String [][] GameOver = new String[22][58];
-        int gameOverX = 6;
-        int gameOverY = 6;
-        for (char c : gameOver1.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 7;
-        for (char c : gameOver2.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 8;
-        for (char c : gameOver3.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 9;
-        for (char c : gameOver4.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 10;
-        for (char c : gameOver5.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        terminal.flush();
-        }
 
     }
