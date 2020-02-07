@@ -119,8 +119,8 @@ public class Painter {
     public static void printScore(Terminal terminal) throws Exception {
         String printScore = "Score: " + (Main.score-1);
         terminal.setCursorPosition(68, 12);
-        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
-        terminal.setForegroundColor(TextColor.ANSI.BLACK);
+        terminal.setBackgroundColor(brightWhite);
+        terminal.setForegroundColor(black);
 
         for(int i = 0; i < printScore.length(); i++) {
             terminal.putCharacter(printScore.charAt(i));
@@ -128,7 +128,7 @@ public class Painter {
     }
 
     public static void printGameOver (Terminal terminal) throws Exception {
-        terminal.setForegroundColor(new TextColor.RGB(255,255,255));
+        terminal.setForegroundColor(brightWhite);
         List<String> gameOver = new ArrayList<>();
         gameOver.add(0, "  ____    _    __  __ _____    _____     _______ ____  ");
         gameOver.add(1, " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ");
