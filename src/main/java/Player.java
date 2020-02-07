@@ -11,31 +11,29 @@ public class Player {
 
     final char playerChar = '█';
 
-    String [] playerGraphic = new String[]{
-            "█", " " ," ", " ", " ", " ", "█",
-            " ", "█", " ", "█", " ", "█", " ",
-            " ", " ", "█", "█", "█", " ", " "
+    char [] playerGraphic = new char[]{
+            'x' ,' ', ' ', ' ', 'x',
+                '\\', 'O', '/',
+                      '█',
     };
     protected Position [] playerPosition = new Position[playerGraphic.length];
     public boolean hitBlock = false;
 
     public Player (int x, int y) {
-        for (int i = 0; i < 7; i++) {
-            Position position = new Position(x++, y);
+        int j = 0;
+        for (int i = 0; i < 5; i++) {
+            Position position = new Position(x+j, y);
             playerPosition[i] = position;
+            j++;
         }
-        int k = 0;
-        for (int i = 7; i < 14; i++) {
-            Position position = new Position(playerPosition[k].getX(), y);
+        int k = 1;
+        for (int i = 5; i < 8; i++) {
+            Position position = new Position(x+k, y+1);
             playerPosition[i] = position;
             k++;
         }
-        int c = 0;
-        for (int i = 14; i < playerGraphic.length; i++) {
-            Position position = new Position(playerPosition[c].getX(), y);
-            playerPosition[i] = position;
-            c++;
-        }
+            Position position = new Position(x+2, y+2);
+            playerPosition[8] = position;
     }
 
     public void playerMove(KeyType type) {
@@ -71,7 +69,7 @@ public class Player {
 
             for (Position p : walls.getWall()) {
                if(playerPosition[0].getX()>30){
-                   if (p.getX() == playerPosition[0].getX()+6) {
+                   if (p.getX() == playerPosition[4].getX()) {
                        for (int j = 0; j < playerGraphic.length ; j++) {
                            playerPosition[j].setX(playerPosition[j].getOldX());
                            playerPosition[j].setY(playerPosition[j].getOldY());
@@ -89,17 +87,18 @@ public class Player {
                      }
                }
             }
-            if (crashIntoWall) {
-            }
-            else {
+            if (!crashIntoWall) {
                 printPlayer(terminal);
             }
+//            else {
+//
+//            }
         }
     }
 
     public void hitBlock(Terminal terminal) throws Exception {
         hitBlock = false;
-        for (int i = 0; i < 7 ; i++) {
+        for (int i = 0; i < 5 ; i++) {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
                     if ((p.getY() == 21 || p.getY() == 22) && p.getX() == playerPosition[i].getX()) {
@@ -127,7 +126,7 @@ public class Player {
     public boolean hitTreat(Treats treat) throws Exception {
         boolean isHitting = false;
 
-        for (int i = 0; i < 7 ; i++) {
+        for (int i = 0; i < 5 ; i++) {
                 if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == 21 || treat.treatPosition.getY() == 22) ) {
                 isHitting = true;
                 break;}
@@ -137,43 +136,16 @@ public class Player {
 
     public void printPlayer(Terminal terminal) throws IOException {
 
-        for (int i = 0; i < 7 ; i++) {
+        terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+        for (int i = 0; i < playerPosition.length; i++ ) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
-            terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
             terminal.putCharacter(' ');
         }
 
-        for (int i = 0; i < 7 ; i++) {
-            playerPosition[i].setY(21);
+        terminal.setForegroundColor(TextColor.ANSI.BLUE);
+        for (int i = 0; i < playerPosition.length; i++) {
             terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
-            terminal.setForegroundColor(TextColor.ANSI.BLUE);
-            terminal.putCharacter(playerGraphic[i].charAt(0));
-        }
-
-        for (int i = 7; i < 14 ; i++) {
-            terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
-            terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-            terminal.putCharacter(' ');
-        }
-
-        for (int q = 7; q < 14 ; q++) {
-            playerPosition[q].setY(22);
-            terminal.setCursorPosition(playerPosition[q].getX(), playerPosition[q].getY());
-            terminal.setForegroundColor(TextColor.ANSI.BLUE);
-            terminal.putCharacter(playerGraphic[q].charAt(0));
-        }
-
-        for (int i = 14; i < playerGraphic.length ; i++) {
-            terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
-            terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-            terminal.putCharacter(' ');
-        }
-
-        for (int m = 14; m < playerGraphic.length ; m++) {
-            playerPosition[m].setY(23);
-            terminal.setCursorPosition(playerPosition[m].getX(), playerPosition[m].getY());
-            terminal.setForegroundColor(TextColor.ANSI.BLUE);
-            terminal.putCharacter(playerGraphic[m].charAt(0));
+            terminal.putCharacter(playerGraphic[i]);
         }
     }
 }

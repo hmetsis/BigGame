@@ -57,7 +57,7 @@ public class Main {
 
         Wall walls = new Wall();
         walls.printWall(terminal);
-        Player player = new Player(20, 20);
+        Player player = new Player(20, 21);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
