@@ -29,7 +29,8 @@ public class Painter {
         welcome.add( 8, "                 __}  {        __}  {        __}  {                     ");
         welcome.add( 9, "                \\`-._,-`-,    \\`-._,-`-,    \\`-._,-`-,                  ");
         welcome.add( 10, "                 `._,._,'      `._,._,'      `._,._,'                   ");
-        welcome.add( 11, "                           Hit any key to start                         ");
+        welcome.add( 11, "                                                                        ");
+        welcome.add( 12, "                           Hit any key to start                         ");
 
         int startScreenX = 4;
         int backToStart = startScreenX;
@@ -52,6 +53,7 @@ public class Painter {
         } while (keyStroke == null);
 
     }
+
     public static void paintBackground (Terminal terminal) throws IOException {
         terminal.clearScreen();
         terminal.setForegroundColor(TextColor.ANSI.WHITE);
@@ -101,6 +103,7 @@ public class Painter {
         }
 
     }
+
     public static void printScore(Terminal terminal) throws Exception {
         String printScore = "Score: " + (Main.score-1);
         terminal.setCursorPosition(68, 12);
@@ -114,47 +117,25 @@ public class Painter {
 
     public static void printGameOver (Terminal terminal) throws Exception {
         terminal.setForegroundColor(new TextColor.RGB(255,255,255));
-        String gameOver1 = "  ____    _    __  __ _____    _____     _______ ____  ";
-        String gameOver2 = " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ";
-        String gameOver3 = "| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |";
-        String gameOver4 = "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ";
-        String gameOver5 = " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\";
+        List<String> gameOver = new ArrayList<>();
+        gameOver.add(0, "  ____    _    __  __ _____    _____     _______ ____  ");
+        gameOver.add(1, " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ");
+        gameOver.add( 2,"| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |");
+        gameOver.add( 3, "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ");
+        gameOver.add( 4, " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\");
 
-        String [][] GameOver = new String[22][58];
-        int gameOverX = 6;
+        int gameOverX = 7;
+        int back = gameOverX;
         int gameOverY = 6;
-        for (char c : gameOver1.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 7;
-        for (char c : gameOver2.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 8;
-        for (char c : gameOver3.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 9;
-        for (char c : gameOver4.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 10;
-        for (char c : gameOver5.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
+
+        for (String i : gameOver) {
+            for (char c : i.toCharArray()) {
+                terminal.setCursorPosition(gameOverX, gameOverY);
+                terminal.putCharacter(c);
+                gameOverX++;
+            }
+            gameOverX = back;
+            gameOverY++;
         }
         terminal.flush();
     }
