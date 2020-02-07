@@ -21,8 +21,8 @@ public class Main {
     static int score = 1;
     public static int lives = 3;
 
-    public static int moveSpeed = 50;
-    public static int oldMoveSpeed = 50;
+    public static int moveSpeed = 40;
+    public static int oldMoveSpeed = 40;
     static int createBlockSpeed = 180;
     static int createTreat = 150;
     static boolean isNotIncreasingSpeed = false;
@@ -42,33 +42,41 @@ public class Main {
         String fileBlockInHead = "src/BlockInHead";
         String fileGameOver = "src/nsmb_game_over.wav";
         String fileWooho = "src/Wooho.wav.wav";
+        String fileIntro = "src/Intro.wav.wav";
 
         MusicStuff eatAppleObject = new MusicStuff();
         MusicStuff otherSoundsObject = new MusicStuff();
+
         otherSoundsObject.playBackgroundMusic(fileBackMusic);
 
         KeyType type = KeyType.ArrowUp;
         KeyStroke keyStroke = null;
 
         terminal.setCursorVisible(false);
+        otherSoundsObject.playLoopedMusic(fileIntro);
         Painter.printStartScreen(terminal, keyStroke);
-        Painter.paintBackground(terminal);
+        otherSoundsObject.stopLoopedMusic(fileIntro);
+        otherSoundsObject.playLoopedMusic(fileBackMusic);
+        paintBackground();
+
         Wall walls = new Wall();
         walls.printWall(terminal);
 
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
+
         blockCreator();
 
         Player player = new Player(20, 21);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-        terminal.flush();
 
+        terminal.flush();
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
+//            terminal.setBackgroundColor(new TextColor.RGB(122,199,220);
             Thread.sleep(30);
             keyStroke = null;
 
@@ -109,6 +117,7 @@ public class Main {
                 eatAppleObject.playMusic(fileAppleBite);
             }
 
+            //adjusted for shorter sleep
             if ((moveBlockSpeed % moveSpeed) == 0) {
                 player.hitBlock = false;
                 for (int i = 0; i < allTreats.size(); i++) {
@@ -120,6 +129,7 @@ public class Main {
                 }
             }
 
+            //change for speeding up the game
             if ((moveBlockSpeed % createBlockSpeed) == 0) {
                 blockCreator();
             }
@@ -150,7 +160,7 @@ public class Main {
 
             if(lives == 0) {
                 gameOver();
-                otherSoundsObject.stopBackgroundMusic(fileBackMusic);
+                otherSoundsObject.stopLoopedMusic(fileBackMusic);
                 otherSoundsObject.playMusic(fileBlockInHead);
                 otherSoundsObject.playGameOver(fileGameOver);
                 continueReadingInput = false;
@@ -171,6 +181,34 @@ public class Main {
         }
     }
 
+    public static void paintBackground () throws IOException {
+        terminal.clearScreen();
+        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+
+        for(int i = 0; i < 5; i++) {
+            for (int j = 0; j < 65; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(TextColor.ANSI.RED);
+                terminal.putCharacter('\u25A1');
+            }
+        }
+        for(int i = 6; i < 65; i++) {
+            for (int j = 0; j < 60; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+                terminal.putCharacter(' ');
+            }
+        }
+        for(int i = 65; i < 80; i++) {
+            for(int j = 0; j < 60; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(TextColor.ANSI.RED);
+                terminal.putCharacter('\u25A1');
+            }
+            terminal.flush();
+        }
+
+    }
 
     public static void printScore() throws Exception {
         String printScore = "Score: " + (score-1);

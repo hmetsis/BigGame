@@ -12,7 +12,7 @@ public class MusicStuff {
     File musicPath;
     AudioInputStream audioInput;
 
-    void playBackgroundMusic (String musicLocation){
+    void playLoopedMusic(String musicLocation){
         try
         {
             musicPath = new File(musicLocation);
@@ -34,7 +34,7 @@ public class MusicStuff {
         }
     }
 
-    void stopBackgroundMusic (String musicLocation){
+    void stopLoopedMusic(String musicLocation){
 
         try
         {
