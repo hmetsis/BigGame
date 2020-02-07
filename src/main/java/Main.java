@@ -23,7 +23,7 @@ public class Main {
 
     public static int moveSpeed = 40;
     public static int oldMoveSpeed = 40;
-    static int createBlockSpeed = 180;
+    static int createBlockSpeed = 150;
     static int createTreat = 150;
     static boolean isNotIncreasingSpeed = false;
 
@@ -127,7 +127,7 @@ public class Main {
                     allBlocks.get(i).printBlock(terminal);
                 }
             }
-
+            if(moveBlockSpeed==Player.extraSpeed)
             //change for speeding up the game
             if ((moveBlockSpeed % createBlockSpeed) == 0) {
                 blockCreator();
@@ -146,12 +146,12 @@ public class Main {
             if(score % 5 == 0 && !isNotIncreasingSpeed && score < 21) {
                 if(score > 15){
                     createTreat = createTreat - 12;
-                    createBlockSpeed = createBlockSpeed - 19;
+                    createBlockSpeed = createBlockSpeed - 12;
                     oldMoveSpeed = oldMoveSpeed - 4;
                     isNotIncreasingSpeed = true;
                 } else {
                     createTreat = createTreat - 24;
-                    createBlockSpeed = createBlockSpeed - 38;
+                    createBlockSpeed = createBlockSpeed - 24;
                     oldMoveSpeed = oldMoveSpeed - 8;
                     isNotIncreasingSpeed = true;
                 }

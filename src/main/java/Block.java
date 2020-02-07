@@ -30,7 +30,7 @@ public class  Block {
 
 
 
-    public static void blockCreator() {
+/*    public static void blockCreator() {
         Block block;
         int b = ThreadLocalRandom.current().nextInt(1, 4);
         switch (b) {
@@ -47,5 +47,5 @@ public class  Block {
                 throw new IndexOutOfBoundsException(b);
         }
         Main.allBlocks.add(block);
-    }
+    }*/
 }
