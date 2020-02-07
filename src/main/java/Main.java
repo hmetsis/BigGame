@@ -23,8 +23,12 @@ public class Main {
 
     public static int moveSpeed = 40;
     public static int oldMoveSpeed = 40;
-    static int createBlockSpeed = 150;
-    static int createTreat = 150;
+    static int createBlockSpeed = 180;
+    static int extraBlockSpeed = 40;
+    static int oldBlockSpeed = 180;
+    static int createTreatSpeed = 150;
+    static int extraTreatSpeed = 30;
+    static int oldTreatSpeed = 150;
     static boolean isNotIncreasingSpeed = false;
 
     static {
@@ -127,13 +131,20 @@ public class Main {
                     allBlocks.get(i).printBlock(terminal);
                 }
             }
-            if(moveBlockSpeed==Player.extraSpeed)
+            if(moveSpeed==player.extraSpeed){
+                createBlockSpeed = extraBlockSpeed;
+                createTreatSpeed = extraTreatSpeed;
+            }
+            else{
+                createBlockSpeed = oldBlockSpeed;
+                createTreatSpeed = oldTreatSpeed;
+            }
             //change for speeding up the game
             if ((moveBlockSpeed % createBlockSpeed) == 0) {
                 blockCreator();
             }
 
-            if ((moveBlockSpeed % createTreat) == 0) {
+            if ((moveBlockSpeed % createTreatSpeed) == 0) {
                 Treats treat = new Treats();
                 allTreats.add(treat);
             }
@@ -145,12 +156,14 @@ public class Main {
             moveBlockSpeed++;
             if(score % 5 == 0 && !isNotIncreasingSpeed && score < 21) {
                 if(score > 15){
-                    createTreat = createTreat - 12;
+                    createTreatSpeed = createTreatSpeed - 12;
+                    oldTreatSpeed = createTreatSpeed - 12;
+                    oldBlockSpeed = createBlockSpeed - 12;
                     createBlockSpeed = createBlockSpeed - 12;
                     oldMoveSpeed = oldMoveSpeed - 4;
                     isNotIncreasingSpeed = true;
                 } else {
-                    createTreat = createTreat - 24;
+                    createTreatSpeed = createTreatSpeed - 24;
                     createBlockSpeed = createBlockSpeed - 24;
                     oldMoveSpeed = oldMoveSpeed - 8;
                     isNotIncreasingSpeed = true;
@@ -184,7 +197,7 @@ public class Main {
     public static void blockCreator() {
         Block block = null;
             for(int i = 0; i < 2; i++) {
-                int b = ThreadLocalRandom.current().nextInt(1, 3);
+                int b = ThreadLocalRandom.current().nextInt(1, 4);
                 switch (b) {
                     case 1:
                         block = new Block3by3();
@@ -195,6 +208,8 @@ public class Main {
                     case 3:
                         block = new Block8by2();
                         break;
+                    default:
+                        throw new IndexOutOfBoundsException(b);
                 }
                 allBlocks.add(block);
             }
