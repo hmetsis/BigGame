@@ -30,6 +30,7 @@ public class Main {
     static int extraTreatSpeed = 30;
     static int oldTreatSpeed = 150;
     static boolean isNotIncreasingSpeed = false;
+    static Position startPosition = new Position(20, 21);
 
     static {
         try {
@@ -67,9 +68,9 @@ public class Main {
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
 
-        blockCreator();
+        Block.blockCreator();
 
-        Player player = new Player(20, 21);
+        Player player = new Player(startPosition);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
@@ -141,7 +142,7 @@ public class Main {
             }
             //change for speeding up the game
             if ((moveBlockSpeed % createBlockSpeed) == 0) {
-                blockCreator();
+                Block.blockCreator();
             }
 
             if ((moveBlockSpeed % createTreatSpeed) == 0) {
@@ -193,33 +194,8 @@ public class Main {
         }
     }
 
-
-    public static void blockCreator() {
-        Block block = null;
-            for(int i = 0; i < 2; i++) {
-                int b = ThreadLocalRandom.current().nextInt(1, 4);
-                switch (b) {
-                    case 1:
-                        block = new Block3by3();
-                        break;
-                    case 2:
-                        block = new Block4by2();
-                        break;
-                    case 3:
-                        block = new Block8by2();
-                        break;
-                    default:
-                        throw new IndexOutOfBoundsException(b);
-                }
-                allBlocks.add(block);
-            }
-    }
-
-
     public static void gameOver() throws Exception {
         continueReadingInput = false;
         Painter.printGameOver(terminal);
     }
-
-
-    }
+}

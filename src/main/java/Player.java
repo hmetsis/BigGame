@@ -21,21 +21,21 @@ public class Player {
     TextColor skyBlue = new TextColor.RGB(122,199,220);
     TextColor blue = TextColor.ANSI.BLUE;
 
-    public Player (int x, int y) {
+    public Player (Position position) {
         int j = 0;
         for (int i = 0; i < playerWitdh; i++) {
-            Position position = new Position(x+j, y);
-            playerPosition[i] = position;
+            Position p = new Position(position.getX()+j, position.getY());
+            playerPosition[i] = p;
             j++;
         }
         int k = 1;
         for (int i = 5; i < playerPosition.length-1; i++) {
-            Position position = new Position(x+k, y+1);
-            playerPosition[i] = position;
+            Position p = new Position(position.getX()+k, position.getY()+1);
+            playerPosition[i] = p;
             k++;
         }
-            Position position = new Position(x+2, y+2);
-            playerPosition[playerPosition.length-1] = position;
+            Position p = new Position( position.getX()+2,  position.getY()+2);
+            playerPosition[playerPosition.length-1] = p;
     }
 
     public void playerMove(KeyType type) {
