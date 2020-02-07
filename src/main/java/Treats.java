@@ -21,7 +21,7 @@ public class Treats extends Block {
                 kindOfTreat = KindOfTreat.EXTRA_LIVES;
             } else {
                 kindOfTreat = KindOfTreat.POINT;
-            }
+                }
         } while (checkIfBlock());
     }
 

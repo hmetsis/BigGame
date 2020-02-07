@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.util.ArrayList;
@@ -5,7 +6,10 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class  Block {
-
+    static TextColor brickRed = TextColor.ANSI.RED;
+    static TextColor grout = TextColor.ANSI.WHITE;
+    static TextColor skyBlue = new TextColor.RGB(122,199,220);
+    protected final char blockChar = '\u25A1';
     protected List<Position> oneBlock = new ArrayList<>();
 
     public Block () {

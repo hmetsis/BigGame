@@ -1,5 +1,3 @@
-
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -12,21 +10,17 @@ public class SoundClass {
     AudioInputStream audioInput;
 
     void playLoopedMusic(String musicLocation){
-        try
-        {
+        try {
             musicPath = new File(musicLocation);
-            if(musicPath.exists())
-            {
+            if (musicPath.exists()) {
                 audioInput = AudioSystem.getAudioInputStream((musicPath));
                 clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
                 clip.loop((Clip.LOOP_CONTINUOUSLY));
-     }
-            else
-            {
+            } else {
                 System.out.println("cant find file");
-            }
+                }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -34,16 +28,12 @@ public class SoundClass {
     }
 
     void stopLoopedMusic(){
-
-        try
-        {
-            if(musicPath.exists())
-            {
-                clip.stop(); }
-            else
-            {
+        try {
+            if (musicPath.exists()) {
+                clip.stop();
+            } else {
                 System.out.println("cant find file");
-            }
+                }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -52,21 +42,17 @@ public class SoundClass {
 
     void playMusic (String musicLocation){
 
-        try
-        {
+        try {
             File musicPath = new File(musicLocation);
 
-            if(musicPath.exists())
-            {
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream((musicPath));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }
-            else
-            {
+            } else {
                 System.out.println("cant find file");
-            }
+                }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -74,22 +60,17 @@ public class SoundClass {
     }
 
     void playGameOver (String musicLocation){
-
-        try
-        {
+        try {
             File musicPath = new File(musicLocation);
 
-            if(musicPath.exists())
-            {
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream((musicPath));
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }
-            else
-            {
+            } else {
                 System.out.println("cant find file");
-            }
+                }
         }
         catch (Exception e){
             e.printStackTrace();

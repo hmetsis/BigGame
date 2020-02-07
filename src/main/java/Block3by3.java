@@ -1,13 +1,8 @@
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Block3by3 extends Block{
-    protected List<Position> oneBlock = new ArrayList<>();
-    protected final char blockChar = '\u25A1';
 
     public Block3by3 () {
         int x = ThreadLocalRandom.current().nextInt(6, 61);
@@ -38,21 +33,19 @@ public class Block3by3 extends Block{
         int i = 0;
         for (Position b : oneBlock) {
             terminal.setCursorPosition(b.getX(), b.getY());
-            terminal.setBackgroundColor(TextColor.ANSI.RED);
-            terminal.setForegroundColor(TextColor.ANSI.WHITE);
+            terminal.setBackgroundColor(brickRed);
+            terminal.setForegroundColor(grout);
             terminal.putCharacter(blockChar);
         }
 
         for (Position b : oneBlock) {
             if (i < 3) {
                 terminal.setCursorPosition(b.getX(), b.getOldY());
-                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-                terminal.setForegroundColor(TextColor.ANSI.WHITE);
+                terminal.setBackgroundColor(skyBlue);
                 terminal.putCharacter(' ');
             }
             i++;
         }
-
     }
 
 

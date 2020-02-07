@@ -1,13 +1,8 @@
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Block8by2 extends Block{
-    protected List<Position> oneBlock = new ArrayList<>();
-    protected final char blockChar = '\u25A1';
 
     public Block8by2 () {
         int x = ThreadLocalRandom.current().nextInt(6, 54);
@@ -38,18 +33,15 @@ public class Block8by2 extends Block{
 
         for(Position b : oneBlock) {
             terminal.setCursorPosition(b.getX(), b.getY());
-            terminal.setBackgroundColor(TextColor.ANSI.RED);
-            terminal.setForegroundColor(TextColor.ANSI.WHITE);
+            terminal.setBackgroundColor(brickRed);
+            terminal.setForegroundColor(grout);
             terminal.putCharacter(blockChar);
-
-
         }
 
         for (Position b : oneBlock) {
             if (i < 8) {
                 terminal.setCursorPosition(b.getX(), b.getOldY());
-                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-                terminal.setForegroundColor(TextColor.ANSI.WHITE);
+                terminal.setBackgroundColor(skyBlue);
                 terminal.putCharacter(' ');
             }
             i++;
