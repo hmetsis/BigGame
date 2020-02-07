@@ -7,6 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Painter {
+    static TextColor skyBlue = new TextColor.RGB(122,199,220);
+    static TextColor brightWhite = new TextColor.RGB(255,255,255);
+    static TextColor brickRed = TextColor.ANSI.RED;
+    static TextColor grout = TextColor.ANSI.WHITE;
+    static TextColor black = TextColor.ANSI.BLACK;
+    static char brick = '\u25A1';
+    static char heart = '\u2665';
+    static int leftWallEnd = 5;
+    static int rightWallStart = 65;
+    static int terminalHeight = 24;
+    static int terminalWidth = 80;
+
     public static void printStartScreen(Terminal terminal, KeyStroke keyStroke) throws IOException, InterruptedException {
         terminal.setBackgroundColor(TextColor.ANSI.RED);
         terminal.setForegroundColor(TextColor.ANSI.WHITE);
@@ -29,7 +41,8 @@ public class Painter {
         welcome.add( 8, "                 __}  {        __}  {        __}  {                     ");
         welcome.add( 9, "                \\`-._,-`-,    \\`-._,-`-,    \\`-._,-`-,                  ");
         welcome.add( 10, "                 `._,._,'      `._,._,'      `._,._,'                   ");
-        welcome.add( 11, "                           Hit any key to start                         ");
+        welcome.add( 11, "                                                                        ");
+        welcome.add( 12, "                           Hit any key to start                         ");
 
         int startScreenX = 4;
         int backToStart = startScreenX;
@@ -52,29 +65,30 @@ public class Painter {
         } while (keyStroke == null);
 
     }
+
     public static void paintBackground (Terminal terminal) throws IOException {
         terminal.clearScreen();
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+        terminal.setForegroundColor(grout);
 
-        for(int i = 0; i < 5; i++) {
-            for (int j = 0; j < 65; j++) {
+        for(int i = 0; i < leftWallEnd ; i++) {
+            for (int j = 0; j < rightWallStart; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
+                terminal.setBackgroundColor(brickRed);
+                terminal.putCharacter(brick);
             }
         }
-        for(int i = 6; i < 65; i++) {
-            for (int j = 0; j < 60; j++) {
+        for(int i = leftWallEnd; i < rightWallStart; i++) {
+            for (int j = 0; j < terminalHeight; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+                terminal.setBackgroundColor(skyBlue);
                 terminal.putCharacter(' ');
             }
         }
-        for(int i = 65; i < 80; i++) {
-            for(int j = 0; j < 60; j++) {
+        for(int i = rightWallStart; i < terminalWidth; i++) {
+            for(int j = 0; j < terminalHeight; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
+                terminal.setBackgroundColor(brickRed);
+                terminal.putCharacter(brick);
             }
             terminal.flush();
         }
@@ -84,8 +98,8 @@ public class Painter {
     public static void printLives(Terminal terminal) throws Exception {
         String printLives = "Lives: ";
         terminal.setCursorPosition(68, 14);
-        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
-        terminal.setForegroundColor(TextColor.ANSI.BLACK);
+        terminal.setBackgroundColor(brightWhite);
+        terminal.setForegroundColor(black);
 
         for(int i = 0; i < printLives.length(); i++) {
             terminal.putCharacter(printLives.charAt(i));
@@ -97,15 +111,16 @@ public class Painter {
         terminal.setCursorPosition(75, 14);
 
         for(int i = 0; i < Main.lives; i++) {
-            terminal.putCharacter('\u2665');
+            terminal.putCharacter(heart);
         }
 
     }
+
     public static void printScore(Terminal terminal) throws Exception {
         String printScore = "Score: " + (Main.score-1);
         terminal.setCursorPosition(68, 12);
-        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
-        terminal.setForegroundColor(TextColor.ANSI.BLACK);
+        terminal.setBackgroundColor(brightWhite);
+        terminal.setForegroundColor(black);
 
         for(int i = 0; i < printScore.length(); i++) {
             terminal.putCharacter(printScore.charAt(i));
@@ -113,48 +128,26 @@ public class Painter {
     }
 
     public static void printGameOver (Terminal terminal) throws Exception {
-        terminal.setForegroundColor(new TextColor.RGB(255,255,255));
-        String gameOver1 = "  ____    _    __  __ _____    _____     _______ ____  ";
-        String gameOver2 = " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ";
-        String gameOver3 = "| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |";
-        String gameOver4 = "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ";
-        String gameOver5 = " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\";
+        terminal.setForegroundColor(brightWhite);
+        List<String> gameOver = new ArrayList<>();
+        gameOver.add(0, "  ____    _    __  __ _____    _____     _______ ____  ");
+        gameOver.add(1, " / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\ ");
+        gameOver.add( 2,"| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) |");
+        gameOver.add( 3, "| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ < ");
+        gameOver.add( 4, " \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_\\");
 
-        String [][] GameOver = new String[22][58];
-        int gameOverX = 6;
+        int gameOverX = 7;
+        int back = gameOverX;
         int gameOverY = 6;
-        for (char c : gameOver1.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 7;
-        for (char c : gameOver2.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 8;
-        for (char c : gameOver3.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 9;
-        for (char c : gameOver4.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
-        }
-        gameOverX = 6;
-        gameOverY = 10;
-        for (char c : gameOver5.toCharArray()) {
-            terminal.setCursorPosition(gameOverX, gameOverY);
-            terminal.putCharacter(c);
-            gameOverX++;
+
+        for (String i : gameOver) {
+            for (char c : i.toCharArray()) {
+                terminal.setCursorPosition(gameOverX, gameOverY);
+                terminal.putCharacter(c);
+                gameOverX++;
+            }
+            gameOverX = back;
+            gameOverY++;
         }
         terminal.flush();
     }
