@@ -6,8 +6,6 @@ import java.io.IOException;
 
 public class Player {
 
-    final char playerChar = '█';
-
     char [] playerGraphic = new char[]{
             'x' ,' ', ' ', ' ', 'x',
                 '\\', '\u263A', '/',
@@ -20,7 +18,8 @@ public class Player {
     int middle = 30;
     int playerHeight = 21;
     int playerHeight2 = 22;
-    TextColor skyBlue= new TextColor.RGB(122,199,220);
+    TextColor skyBlue = new TextColor.RGB(122,199,220);
+    TextColor blue = TextColor.ANSI.BLUE;
 
     public Player (int x, int y) {
         int j = 0;
@@ -144,7 +143,7 @@ public class Player {
             terminal.putCharacter(' ');
         }
 
-        terminal.setForegroundColor(TextColor.ANSI.BLUE);
+        terminal.setForegroundColor(blue);
         for (int i = 0; i < playerPosition.length; i++) {
             terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
             terminal.putCharacter(playerGraphic[i]);
