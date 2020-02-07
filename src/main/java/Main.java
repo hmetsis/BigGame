@@ -48,23 +48,25 @@ public class Main {
 
         otherSoundsObject.playBackgroundMusic(fileBackMusic);
 
+        KeyType type = KeyType.ArrowUp;
+        KeyStroke keyStroke = null;
+
         terminal.setCursorVisible(false);
+        Painter.printStartScreen(terminal, keyStroke);
         paintBackground();
+        Wall walls = new Wall();
+        walls.printWall(terminal);
 
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
 
         blockCreator();
 
-        Wall walls = new Wall();
-        walls.printWall(terminal);
         Player player = new Player(20, 21);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
 
-        KeyType type = KeyType.ArrowUp;
-        KeyStroke keyStroke;
         terminal.flush();
         int moveBlockSpeed = 0;
 
@@ -176,6 +178,8 @@ public class Main {
 
     public static void paintBackground () throws IOException {
         terminal.clearScreen();
+        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+
         for(int i = 0; i < 5; i++) {
             for (int j = 0; j < 65; j++) {
                 terminal.setCursorPosition(i, j);

@@ -13,7 +13,7 @@ public class Player {
 
     char [] playerGraphic = new char[]{
             'x' ,' ', ' ', ' ', 'x',
-                '\\', 'O', '/',
+                '\\', '\u263A', '/',
                       '█',
     };
     protected Position [] playerPosition = new Position[playerGraphic.length];
@@ -158,5 +158,7 @@ public class Player {
             terminal.setCursorPosition(playerPosition[i].getX(), playerPosition[i].getY());
             terminal.putCharacter(playerGraphic[i]);
         }
+        terminal.setCursorPosition(playerPosition[6].getX(), playerPosition[6].getY());
+        terminal.putCharacter(playerGraphic[6]);
     }
 }
