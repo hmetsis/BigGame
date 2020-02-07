@@ -44,10 +44,8 @@ public class Main {
         String fileWooho = "src/Wooho.wav.wav";
         String fileIntro = "src/Intro.wav.wav";
 
-        MusicStuff eatAppleObject = new MusicStuff();
-        MusicStuff otherSoundsObject = new MusicStuff();
-
-        otherSoundsObject.playBackgroundMusic(fileBackMusic);
+        SoundClass eatAppleObject = new SoundClass();
+        SoundClass otherSoundsObject = new SoundClass();
 
         KeyType type = KeyType.ArrowUp;
         KeyStroke keyStroke = null;
@@ -57,7 +55,7 @@ public class Main {
         Painter.printStartScreen(terminal, keyStroke);
         otherSoundsObject.stopLoopedMusic(fileIntro);
         otherSoundsObject.playLoopedMusic(fileBackMusic);
-        paintBackground();
+        Painter.paintBackground(terminal);
 
         Wall walls = new Wall();
         walls.printWall(terminal);
@@ -109,7 +107,7 @@ public class Main {
             if (player.hitTreat(allTreats.get(0))) {
                 if (allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3) {
                     Main.lives++;
-                    MusicStuff eatExtraLife = new MusicStuff();
+                    SoundClass eatExtraLife = new SoundClass();
                     eatExtraLife.playMusic(fileWooho);
                 }
                 allTreats.remove(0);
@@ -176,34 +174,6 @@ public class Main {
         }
     }
 
-    public static void paintBackground () throws IOException {
-        terminal.clearScreen();
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
-
-        for(int i = 0; i < 5; i++) {
-            for (int j = 0; j < 65; j++) {
-                terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
-            }
-        }
-        for(int i = 6; i < 65; i++) {
-            for (int j = 0; j < 60; j++) {
-                terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-                terminal.putCharacter(' ');
-            }
-        }
-        for(int i = 65; i < 80; i++) {
-            for(int j = 0; j < 60; j++) {
-                terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
-            }
-            terminal.flush();
-        }
-
-    }
 
     public static void blockCreator() {
         Block block = null;

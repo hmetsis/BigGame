@@ -6,7 +6,7 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 import java.util.Arrays;
 
-public class MusicStuff {
+public class SoundClass {
 
     Clip clip;
     File musicPath;
@@ -26,7 +26,7 @@ public class MusicStuff {
      }
             else
             {
-                System.out.println("cant find background music");
+                System.out.println("cant find file");
             }
         }
         catch (Exception e){

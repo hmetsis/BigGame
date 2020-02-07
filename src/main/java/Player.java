@@ -1,11 +1,8 @@
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Player {
 
@@ -115,7 +112,7 @@ public class Player {
         }
 
         if (hitBlock) {
-            MusicStuff musicObject3 = new MusicStuff();
+            SoundClass musicObject3 = new SoundClass();
             String filepath3 = "src/BlockInHead";
             musicObject3.playMusic(filepath3);
             //Main.gameOver();
