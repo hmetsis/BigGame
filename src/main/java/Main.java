@@ -159,6 +159,10 @@ public class Main {
                 continueReadingInput = false;
             }
 
+            if(allBlocks.get(0).getOneBlock().get(0).getY() > 30) {
+                allBlocks.remove(0);
+            }
+
             //Ligga sist i loopen
 //            terminal.setCursorPosition(x, y);
 //            terminal.putCharacter(player);
