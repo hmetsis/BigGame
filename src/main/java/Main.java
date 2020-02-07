@@ -45,7 +45,6 @@ public class Main {
 
         MusicStuff eatAppleObject = new MusicStuff();
         MusicStuff otherSoundsObject = new MusicStuff();
-
         otherSoundsObject.playBackgroundMusic(fileBackMusic);
 
         KeyType type = KeyType.ArrowUp;
@@ -53,25 +52,23 @@ public class Main {
 
         terminal.setCursorVisible(false);
         Painter.printStartScreen(terminal, keyStroke);
-        paintBackground();
+        Painter.paintBackground(terminal);
         Wall walls = new Wall();
         walls.printWall(terminal);
 
         Treats firstTreat = new Treats();
         allTreats.add(firstTreat);
-
         blockCreator();
 
         Player player = new Player(20, 21);
         player.printPlayer(terminal);
 
         terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-
         terminal.flush();
+
         int moveBlockSpeed = 0;
 
         while (continueReadingInput) {
-//            terminal.setBackgroundColor(new TextColor.RGB(122,199,220);
             Thread.sleep(30);
             keyStroke = null;
 
@@ -82,7 +79,7 @@ public class Main {
                 player.playerMove(type);
             }
 
-            if(!type.equals(KeyType.ArrowDown)){
+            if (!type.equals(KeyType.ArrowDown)){
                 moveSpeed = oldMoveSpeed;
             }
 
@@ -112,7 +109,6 @@ public class Main {
                 eatAppleObject.playMusic(fileAppleBite);
             }
 
-            //adjusted for shorter sleep
             if ((moveBlockSpeed % moveSpeed) == 0) {
                 player.hitBlock = false;
                 for (int i = 0; i < allTreats.size(); i++) {
@@ -124,7 +120,6 @@ public class Main {
                 }
             }
 
-            //change for speeding up the game
             if ((moveBlockSpeed % createBlockSpeed) == 0) {
                 blockCreator();
             }
@@ -139,7 +134,7 @@ public class Main {
             }
 
             moveBlockSpeed++;
-           if(score % 5 == 0 && !isNotIncreasingSpeed) {
+            if(score % 5 == 0 && !isNotIncreasingSpeed) {
                 createTreat = createTreat-6;
                 createBlockSpeed = createBlockSpeed-9;
                 moveSpeed = moveSpeed-2;
@@ -176,34 +171,6 @@ public class Main {
         }
     }
 
-    public static void paintBackground () throws IOException {
-        terminal.clearScreen();
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
-
-        for(int i = 0; i < 5; i++) {
-            for (int j = 0; j < 65; j++) {
-                terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
-            }
-        }
-        for(int i = 6; i < 65; i++) {
-            for (int j = 0; j < 60; j++) {
-                terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
-                terminal.putCharacter(' ');
-            }
-        }
-        for(int i = 65; i < 80; i++) {
-            for(int j = 0; j < 60; j++) {
-                terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
-            }
-            terminal.flush();
-        }
-
-    }
 
     public static void printScore() throws Exception {
         String printScore = "Score: " + (score-1);

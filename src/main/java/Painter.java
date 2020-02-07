@@ -52,4 +52,33 @@ public class Painter {
         } while (keyStroke == null);
 
     }
+    public static void paintBackground (Terminal terminal) throws IOException {
+        terminal.clearScreen();
+        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+
+        for(int i = 0; i < 5; i++) {
+            for (int j = 0; j < 65; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(TextColor.ANSI.RED);
+                terminal.putCharacter('\u25A1');
+            }
+        }
+        for(int i = 6; i < 65; i++) {
+            for (int j = 0; j < 60; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+                terminal.putCharacter(' ');
+            }
+        }
+        for(int i = 65; i < 80; i++) {
+            for(int j = 0; j < 60; j++) {
+                terminal.setCursorPosition(i, j);
+                terminal.setBackgroundColor(TextColor.ANSI.RED);
+                terminal.putCharacter('\u25A1');
+            }
+            terminal.flush();
+        }
+
+    }
+
 }
