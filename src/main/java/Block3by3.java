@@ -28,10 +28,16 @@ public class Block3by3 extends Block{
 
     @Override
     public void moveBlock (Terminal terminal) throws Exception {
-        int i = 0;
         for (Position b : oneBlock) {
             b.setOldY(b.getY());
             b.setY(b.getY() + 1);
+        }
+    }
+
+    @Override
+    public void printBlock (Terminal terminal) throws Exception {
+        int i = 0;
+        for (Position b : oneBlock) {
             terminal.setCursorPosition(b.getX(), b.getY());
             terminal.setBackgroundColor(TextColor.ANSI.RED);
             terminal.setForegroundColor(TextColor.ANSI.WHITE);
@@ -49,16 +55,6 @@ public class Block3by3 extends Block{
         }
 
     }
-
-//    @Override
-//    public void printBlock (Terminal terminal) throws Exception {
-//        for (Position position : oneBlock) {
-//            terminal.setCursorPosition(position.getX(), position.getY());
-//            terminal.setBackgroundColor(TextColor.ANSI.RED);
-//            terminal.setForegroundColor(TextColor.ANSI.WHITE);
-//            terminal.putCharacter(blockChar);
-//        }
-//    }
 
 
 

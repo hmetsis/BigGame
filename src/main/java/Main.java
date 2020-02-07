@@ -124,6 +124,7 @@ public class Main {
 
                 for (int i = 0; i < allBlocks.size(); i++) {
                     allBlocks.get(i).moveBlock(terminal);
+                    allBlocks.get(i).printBlock(terminal);
                 }
             }
 
