@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Painter {
+    TextColor skyBlue= new TextColor.RGB(122,199,220);
+
     public static void printStartScreen(Terminal terminal, KeyStroke keyStroke) throws IOException, InterruptedException {
         terminal.setBackgroundColor(TextColor.ANSI.RED);
         terminal.setForegroundColor(TextColor.ANSI.WHITE);

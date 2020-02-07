@@ -18,6 +18,9 @@ public class Player {
     int playerWitdh = 5;
     int extraSpeed = 10;
     int middle = 30;
+    int playerHeight = 21;
+    int playerHeight2 = 22;
+    TextColor skyBlue= new TextColor.RGB(122,199,220);
 
     public Player (int x, int y) {
         int j = 0;
@@ -91,10 +94,10 @@ public class Player {
         hitBlock = false;
         Block deleteBlock = null;
 
-        for (int i = 0; i < 5 ; i++) {
+        for (int i = 0; i < playerWitdh ; i++) {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
-                    if ((p.getY() == 21 || p.getY() == 22) && p.getX() == playerPosition[i].getX()) {
+                    if ((p.getY() == playerHeight || p.getY() == playerHeight2) && p.getX() == playerPosition[i].getX()) {
                         hitBlock = true;
                         deleteBlock = block;
                         break;
@@ -124,8 +127,8 @@ public class Player {
     public boolean hitTreat(Treats treat) throws Exception {
         boolean isHitting = false;
 
-        for (int i = 0; i < 5 ; i++) {
-            if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == 21 || treat.treatPosition.getY() == 22) ) {
+        for (int i = 0; i < playerWitdh ; i++) {
+            if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == playerHeight || treat.treatPosition.getY() == playerHeight2) ) {
             isHitting = true;
             break;
             }
@@ -135,7 +138,7 @@ public class Player {
 
     public void printPlayer(Terminal terminal) throws IOException {
 
-        terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+        terminal.setBackgroundColor(skyBlue);
         for (int i = 0; i < playerPosition.length; i++ ) {
             terminal.setCursorPosition(playerPosition[i].getOldX(), playerPosition[i].getOldY());
             terminal.putCharacter(' ');
