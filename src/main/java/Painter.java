@@ -7,7 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Painter {
-    TextColor skyBlue= new TextColor.RGB(122,199,220);
+    static TextColor skyBlue = new TextColor.RGB(122,199,220);
+    static TextColor brightWhite = new TextColor.RGB(255,255,255);
+    static TextColor brickRed = TextColor.ANSI.RED;
+    static TextColor grout = TextColor.ANSI.WHITE;
+    static TextColor black = TextColor.ANSI.BLACK;
+    static char brick = '\u25A1';
+    static char heart = '\u2665';
+    static int leftWallEnd = 5;
+    static int rightWallStart = 65;
+    static int terminalHeight = 24;
+    static int terminalWidth = 80;
 
     public static void printStartScreen(Terminal terminal, KeyStroke keyStroke) throws IOException, InterruptedException {
         terminal.setBackgroundColor(TextColor.ANSI.RED);
@@ -58,27 +68,27 @@ public class Painter {
 
     public static void paintBackground (Terminal terminal) throws IOException {
         terminal.clearScreen();
-        terminal.setForegroundColor(TextColor.ANSI.WHITE);
+        terminal.setForegroundColor(grout);
 
-        for(int i = 0; i < 5; i++) {
-            for (int j = 0; j < 65; j++) {
+        for(int i = 0; i < leftWallEnd ; i++) {
+            for (int j = 0; j < rightWallStart; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
+                terminal.setBackgroundColor(brickRed);
+                terminal.putCharacter(brick);
             }
         }
-        for(int i = 6; i < 65; i++) {
-            for (int j = 0; j < 60; j++) {
+        for(int i = leftWallEnd; i < rightWallStart; i++) {
+            for (int j = 0; j < terminalHeight; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(new TextColor.RGB(122,199,220));
+                terminal.setBackgroundColor(skyBlue);
                 terminal.putCharacter(' ');
             }
         }
-        for(int i = 65; i < 80; i++) {
-            for(int j = 0; j < 60; j++) {
+        for(int i = rightWallStart; i < terminalWidth; i++) {
+            for(int j = 0; j < terminalHeight; j++) {
                 terminal.setCursorPosition(i, j);
-                terminal.setBackgroundColor(TextColor.ANSI.RED);
-                terminal.putCharacter('\u25A1');
+                terminal.setBackgroundColor(brickRed);
+                terminal.putCharacter(brick);
             }
             terminal.flush();
         }
@@ -88,8 +98,8 @@ public class Painter {
     public static void printLives(Terminal terminal) throws Exception {
         String printLives = "Lives: ";
         terminal.setCursorPosition(68, 14);
-        terminal.setBackgroundColor(new TextColor.RGB(255,255,255));
-        terminal.setForegroundColor(TextColor.ANSI.BLACK);
+        terminal.setBackgroundColor(brightWhite);
+        terminal.setForegroundColor(black);
 
         for(int i = 0; i < printLives.length(); i++) {
             terminal.putCharacter(printLives.charAt(i));
@@ -101,7 +111,7 @@ public class Painter {
         terminal.setCursorPosition(75, 14);
 
         for(int i = 0; i < Main.lives; i++) {
-            terminal.putCharacter('\u2665');
+            terminal.putCharacter(heart);
         }
 
     }
