@@ -1,6 +1,3 @@
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.util.ArrayList;
@@ -30,7 +27,7 @@ public class  Block {
 
 
 
-/*    public static void blockCreator() {
+    public static void blockCreator() {
         Block block;
         int b = ThreadLocalRandom.current().nextInt(1, 4);
         switch (b) {
@@ -46,6 +43,12 @@ public class  Block {
             default:
                 throw new IndexOutOfBoundsException(b);
         }
-        Main.allBlocks.add(block);
-    }*/
+        TheGame.allBlocks.add(block);
+    }
+
+    public static void removeBlock(){
+        if(TheGame.allBlocks.get(0).getOneBlock().get(0).getY() > 30) {
+            TheGame.allBlocks.remove(0);
+        }
+    }
 }

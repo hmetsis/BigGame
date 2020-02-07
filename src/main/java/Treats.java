@@ -28,11 +28,10 @@ public class Treats extends Block {
     public boolean checkIfBlock() {
         boolean crashing = false;
 
-        for (Block oneBlock : Main.allBlocks) {
+        for (Block oneBlock : TheGame.allBlocks) {
             for (Position p : oneBlock.getOneBlock()) {
                 if (p.getY() == treatPosition.getY() && p.getX() == treatPosition.getX()) {
                     crashing = true;
-                    System.out.println("Hej");
                     break;
                 }
             }

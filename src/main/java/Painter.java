@@ -110,14 +110,14 @@ public class Painter {
         }
         terminal.setCursorPosition(75, 14);
 
-        for(int i = 0; i < Main.lives; i++) {
+        for(int i = 0; i < TheGame.lives; i++) {
             terminal.putCharacter(heart);
         }
 
     }
 
     public static void printScore(Terminal terminal) throws Exception {
-        String printScore = "Score: " + (Main.score-1);
+        String printScore = "Score: " + (TheGame.score-1);
         terminal.setCursorPosition(68, 12);
         terminal.setBackgroundColor(brightWhite);
         terminal.setForegroundColor(black);

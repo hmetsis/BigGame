@@ -46,7 +46,7 @@ public class Player {
 
             switch (type) {
                 case ArrowDown:
-                    Main.moveSpeed = extraSpeed;
+                    TheGame.moveSpeed = extraSpeed;
                     break;
                 case ArrowRight:
                     playerPosition[i].setX(playerPosition[i].getX()+1);
@@ -94,7 +94,7 @@ public class Player {
         Block deleteBlock = null;
 
         for (int i = 0; i < playerWitdh ; i++) {
-            for (Block block : Main.allBlocks) {
+            for (Block block : TheGame.allBlocks) {
                 for (Position p : block.getOneBlock()) {
                     if ((p.getY() == playerHeight || p.getY() == playerHeight2) && p.getX() == playerPosition[i].getX()) {
                         hitBlock = true;
@@ -109,7 +109,7 @@ public class Player {
             SoundClass musicObject3 = new SoundClass();
             String filepath3 = "src/BlockInHead";
             musicObject3.playMusic(filepath3);
-            Main.lives = Main.lives-1;
+            TheGame.lives = TheGame.lives-1;
         } else {
             printPlayer(terminal);
             }
@@ -119,7 +119,7 @@ public class Player {
                 terminal.setCursorPosition(p.getX(), p.getY());
                 terminal.putCharacter(' ');
             }
-            Main.allBlocks.remove(deleteBlock);
+            TheGame.allBlocks.remove(deleteBlock);
         }
     }
 
