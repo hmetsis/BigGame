@@ -15,26 +15,28 @@ public class Player {
     };
     protected Position [] playerPosition = new Position[playerGraphic.length];
     public boolean hitBlock = false;
+    int playerWitdh = 5;
+    int extraSpeed = 10;
+    int middle = 30;
 
     public Player (int x, int y) {
         int j = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < playerWitdh; i++) {
             Position position = new Position(x+j, y);
             playerPosition[i] = position;
             j++;
         }
         int k = 1;
-        for (int i = 5; i < 8; i++) {
+        for (int i = 5; i < playerPosition.length-1; i++) {
             Position position = new Position(x+k, y+1);
             playerPosition[i] = position;
             k++;
         }
             Position position = new Position(x+2, y+2);
-            playerPosition[8] = position;
+            playerPosition[playerPosition.length-1] = position;
     }
 
     public void playerMove(KeyType type) {
-
         for (int i = 0; i < playerGraphic.length; i++) {
 
             playerPosition[i].setOldX(playerPosition[i].getX());
@@ -42,54 +44,46 @@ public class Player {
 
             switch (type) {
                 case ArrowDown:
-                    Main.moveSpeed = 10;
+                    Main.moveSpeed = extraSpeed;
                     break;
                 case ArrowRight:
                     playerPosition[i].setX(playerPosition[i].getX()+1);
-
                     break;
-    //            case ArrowUp:
-    //                y--;
-    //                break;
                 case ArrowLeft:
                     playerPosition[i].setX(playerPosition[i].getX()-1);
-
                     break;
             }
         }
     }
 
     public void checkIfWall (Wall walls, Terminal terminal) throws IOException {
-        for (int i = 0; i < 7 ; i++) {
+        for (int i = 0; i < playerWitdh ; i++) {
 
             boolean crashIntoWall = false;
 
             for (Position p : walls.getWall()) {
-               if(playerPosition[0].getX()>30){
-                   if (p.getX() == playerPosition[4].getX()) {
-                       for (int j = 0; j < playerGraphic.length ; j++) {
+                if(playerPosition[0].getX()>middle){
+                    if (p.getX() == playerPosition[playerWitdh-1].getX()) {
+                        for (int j = 0; j < playerGraphic.length ; j++) {
                            playerPosition[j].setX(playerPosition[j].getOldX());
                            playerPosition[j].setY(playerPosition[j].getOldY());
                            crashIntoWall = true;
-                       }
-                   }
-
-               } else {
-                     if (p.getX() == playerPosition[0].getX()) {
-                        for (int k = 0; k < playerGraphic.length ; k++) {
-                            playerPosition[k].setX(playerPosition[k].getOldX());
-                            playerPosition[k].setY(playerPosition[k].getOldY());
-                            crashIntoWall = true;
                         }
-                     }
-               }
+                    }
+
+                } else {
+                    if (p.getX() == playerPosition[0].getX()) {
+                        for (int k = 0; k < playerGraphic.length ; k++) {
+                        playerPosition[k].setX(playerPosition[k].getOldX());
+                        playerPosition[k].setY(playerPosition[k].getOldY());
+                        crashIntoWall = true;
+                        }
+                    }
+                }
             }
             if (!crashIntoWall) {
                 printPlayer(terminal);
             }
-//            else {
-//
-//            }
         }
     }
 
@@ -101,8 +95,6 @@ public class Player {
             for (Block block : Main.allBlocks) {
                 for (Position p : block.getOneBlock()) {
                     if ((p.getY() == 21 || p.getY() == 22) && p.getX() == playerPosition[i].getX()) {
-//                for (int j = 0; j < block.getOneBlock().size(); j++) {
-//                    if (playerPosition[i] == block.getOneBlock().get(j)) {
                         hitBlock = true;
                         deleteBlock = block;
                         break;
@@ -115,12 +107,10 @@ public class Player {
             SoundClass musicObject3 = new SoundClass();
             String filepath3 = "src/BlockInHead";
             musicObject3.playMusic(filepath3);
-            //Main.gameOver();
             Main.lives = Main.lives-1;
-            //System.out.println("Game over");
         } else {
             printPlayer(terminal);
-        }
+            }
 
         if (hitBlock) {
             for (Position p : deleteBlock.getOneBlock()) {
@@ -135,9 +125,10 @@ public class Player {
         boolean isHitting = false;
 
         for (int i = 0; i < 5 ; i++) {
-                if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == 21 || treat.treatPosition.getY() == 22) ) {
-                isHitting = true;
-                break;}
+            if (treat.treatPosition.getX() == playerPosition[i].getX() && (treat.treatPosition.getY() == 21 || treat.treatPosition.getY() == 22) ) {
+            isHitting = true;
+            break;
+            }
         }
         return isHitting;
     }
