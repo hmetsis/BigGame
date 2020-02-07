@@ -21,8 +21,8 @@ public class Main {
     static int score = 1;
     public static int lives = 3;
 
-    public static int moveSpeed = 50;
-    public static int oldMoveSpeed = 50;
+    public static int moveSpeed = 40;
+    public static int oldMoveSpeed = 40;
     static int createBlockSpeed = 180;
     static int createTreat = 150;
     static boolean isNotIncreasingSpeed = false;
@@ -134,16 +134,21 @@ public class Main {
             }
 
             moveBlockSpeed++;
-            if(score % 5 == 0 && !isNotIncreasingSpeed) {
-                createTreat = createTreat-6;
-                createBlockSpeed = createBlockSpeed-9;
-                moveSpeed = moveSpeed-2;
-                oldMoveSpeed = oldMoveSpeed-2;
-                isNotIncreasingSpeed = true;
+            if(score % 5 == 0 && !isNotIncreasingSpeed && score < 21) {
+                if(score > 15){
+                    createTreat = createTreat - 12;
+                    createBlockSpeed = createBlockSpeed - 19;
+                    oldMoveSpeed = oldMoveSpeed - 4;
+                    isNotIncreasingSpeed = true;
+                } else {
+                    createTreat = createTreat - 24;
+                    createBlockSpeed = createBlockSpeed - 38;
+                    oldMoveSpeed = oldMoveSpeed - 8;
+                    isNotIncreasingSpeed = true;
+                }
             } else if (score%2 == 0) {
                 isNotIncreasingSpeed = false;
             }
-
             if (score%2 == 0 && score%5 == 0){
                 isNotIncreasingSpeed = true;
             }

@@ -45,7 +45,7 @@ public class Player {
 
             switch (type) {
                 case ArrowDown:
-                    Main.moveSpeed = 15;
+                    Main.moveSpeed = 10;
                     break;
                 case ArrowRight:
                     playerPosition[i].setX(playerPosition[i].getX()+1);
