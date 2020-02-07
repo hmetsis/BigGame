@@ -37,15 +37,16 @@ public class Main {
 
     public static void main (String [] args) throws Exception {
 
-        String filepath = "src/Apple_Bite.wav";
-        String filepath2 = "src/BackMusic.wav";
-        String filepath3 = "src/BlockInHead";
-        String filepath4 = "src/nsmb_game_over.wav";
+        String fileAppleBite = "src/Apple_Bite.wav";
+        String fileBackMusic = "src/BackMusic.wav";
+        String fileBlockInHead = "src/BlockInHead";
+        String fileGameOver = "src/nsmb_game_over.wav";
+        String fileWooho = "src/Wooho.wav.wav";
 
         MusicStuff eatAppleObject = new MusicStuff();
         MusicStuff otherSoundsObject = new MusicStuff();
 
-        otherSoundsObject.playBackgroundMusic(filepath2);
+        otherSoundsObject.playBackgroundMusic(fileBackMusic);
 
         terminal.setCursorVisible(false);
         paintBackground();
@@ -88,9 +89,7 @@ public class Main {
             if (!player.hitBlock) {
                 player.hitBlock(terminal);
                 if (player.hitBlock) {
-                    otherSoundsObject.stopBackgroundMusic(filepath2);
-                    otherSoundsObject.playMusic(filepath3);
-                    otherSoundsObject.playGameOver(filepath4);
+                    otherSoundsObject.playMusic(fileBlockInHead);
                 }
             }
 
@@ -103,10 +102,12 @@ public class Main {
             if (player.hitTreat(allTreats.get(0))) {
                 if (allTreats.get(0).kindOfTreat.equals(KindOfTreat.EXTRA_LIVES) && Main.lives < 3) {
                     Main.lives++;
+                    MusicStuff eatExtraLife = new MusicStuff();
+                    eatExtraLife.playMusic(fileWooho);
                 }
                 allTreats.remove(0);
                 score++;
-                eatAppleObject.playMusic(filepath);
+                eatAppleObject.playMusic(fileAppleBite);
             }
 
             //adjusted for shorter sleep
@@ -152,6 +153,9 @@ public class Main {
 
             if(lives == 0) {
                 gameOver();
+                otherSoundsObject.stopBackgroundMusic(fileBackMusic);
+                otherSoundsObject.playMusic(fileBlockInHead);
+                otherSoundsObject.playGameOver(fileGameOver);
                 continueReadingInput = false;
             }
 

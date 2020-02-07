@@ -117,7 +117,7 @@ public class Player {
             musicObject3.playMusic(filepath3);
             //Main.gameOver();
             Main.lives = Main.lives-1;
-            System.out.println("Game over");
+            //System.out.println("Game over");
         } else {
             printPlayer(terminal);
         }
